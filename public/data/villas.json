@@ -1,0 +1,46 @@
+[
+  {
+    "id": "willa-bursztynowa",
+    "name": "Willa Bursztynowa",
+    "price": 650,
+    "rating": 4.9,
+    "reviewsCount": 32,
+    "distanceToBeach": 300,
+    "image": "/images/willa_bursztynowa.png",
+    "featured": true,
+    "amenities": ["Basen", "Sauna", "Parking", "Klimatyzacja", "Wi-Fi"]
+  },
+  {
+    "id": "willa-perlowa",
+    "name": "Willa Perłowa",
+    "price": 590,
+    "rating": 4.8,
+    "reviewsCount": 28,
+    "distanceToBeach": 500,
+    "image": "/images/willa_perlowa.png",
+    "featured": true,
+    "amenities": ["Jacuzzi", "Parking", "Wi-Fi", "Widok na morze", "Taras"]
+  },
+  {
+    "id": "willa-morska",
+    "name": "Willa Morska",
+    "price": 720,
+    "rating": 4.7,
+    "reviewsCount": 18,
+    "distanceToBeach": 700,
+    "image": "/images/willa_morska.png",
+    "featured": true,
+    "amenities": ["Basen", "Klimatyzacja", "Zwierzęta akceptowane", "Grill"]
+  },
+  {
+    "id": "willa-baltic",
+    "name": "Willa Baltic",
+    "price": 680,
+    "rating": 4.9,
+    "reviewsCount": 41,
+    "distanceToBeach": 250,
+    "image": "/images/willa_baltic.png",
+    "featured": true,
+    "amenities": ["Basen", "Sauna", "Taras", "Wi-Fi", "Parking"]
+  }
+]
