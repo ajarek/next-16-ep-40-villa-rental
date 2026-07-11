@@ -6,9 +6,34 @@
     "rating": 4.9,
     "reviewsCount": 32,
     "distanceToBeach": 300,
+    "numberOfPeople": 6,
+    "status": "free",
     "image": "/images/willa_bursztynowa.png",
     "featured": true,
-    "amenities": ["Basen", "Sauna", "Parking", "Klimatyzacja", "Wi-Fi"]
+    "amenities": ["Basen", "Sauna", "Parking", "Klimatyzacja", "Wi-Fi"],
+    "location": "Kołobrzeg-Uzdrowisko",
+    "description": "Luksusowa willa z prywatnym basenem i sauną, położona w sercu dzielnicy uzdrowiskowej Kołobrzegu. Otoczona bujną zielenią, oferuje idealne warunki do relaksu i regeneracji. Każdy apartament został zaprojektowany z dbałością o najmniejsze detale, łącząc nowoczesny design z nadmorskim klimatem. Przestronny taras z widokiem na ogród zachęca do porannej kawy, a wieczorem do wspólnych kolacji przy grillu. Prywatny basen podgrzewany przez cały sezon gwarantuje przyjemność kąpieli niezależnie od pogody.",
+    "gallery": [
+      "/images/willa_bursztynowa.png",
+      "/images/willa_bursztynowa.png",
+      "/images/willa_bursztynowa.png",
+      "/images/willa_bursztynowa.png",
+      "/images/willa_bursztynowa.png"
+    ],
+    "coordinates": { "lat": 54.1761, "lng": 15.5762 },
+    "rules": {
+      "checkIn": "15:00",
+      "checkOut": "11:00",
+      "minimumStay": 3,
+      "smoking": false,
+      "pets": true,
+      "parties": false
+    },
+    "reviews": [
+      { "author": "Anna W.", "rating": 5, "date": "2026-06-10", "text": "Przepiękny obiekt! Basen i sauna robią ogromne wrażenie. Na pewno wrócimy." },
+      { "author": "Marcin K.", "rating": 5, "date": "2026-05-28", "text": "Willla przewyższyła nasze oczekiwania. Pięknie urządzona, czysto, idealna lokalizacja." },
+      { "author": "Katarzyna L.", "rating": 4.5, "date": "2026-05-15", "text": "Cudowne miejsce na rodzinny wypoczynek. Blisko do plaży i centrum." }
+    ]
   },
   {
     "id": "willa-perlowa",
@@ -17,9 +42,33 @@
     "rating": 4.8,
     "reviewsCount": 28,
     "distanceToBeach": 500,
+    "numberOfPeople": 4,
+    "status": "free",
     "image": "/images/willa_perlowa.png",
     "featured": true,
-    "amenities": ["Jacuzzi", "Parking", "Wi-Fi", "Widok na morze", "Taras"]
+    "amenities": ["Jacuzzi", "Parking", "Wi-Fi", "Widok na morze", "Taras"],
+    "location": "Kołobrzeg-Centrum",
+    "description": "Elegancka willa z przepięknym widokiem na morze, usytuowana w samym centrum Kołobrzegu. Nowoczesne wnętrza w morskiej kolorystyce tworzą niepowtarzalny nastrój. Prywatne jacuzzi na tarasie to idealne miejsce na wieczorny relaks z lampką wina. Willa oferuje doskonałą bazę wypadową do zwiedzania miasta – molo, latarnia morska i port są zaledwie kilka minut spacerem. Każdy detal wystroju został starannie dobrany, aby zapewnić gościom niezapomniane chwile nad Bałtykiem.",
+    "gallery": [
+      "/images/willa_perlowa.png",
+      "/images/willa_perlowa.png",
+      "/images/willa_perlowa.png",
+      "/images/willa_perlowa.png"
+    ],
+    "coordinates": { "lat": 54.1792, "lng": 15.5748 },
+    "rules": {
+      "checkIn": "15:00",
+      "checkOut": "10:00",
+      "minimumStay": 2,
+      "smoking": false,
+      "pets": false,
+      "parties": false
+    },
+    "reviews": [
+      { "author": "Piotr S.", "rating": 5, "date": "2026-06-05", "text": "Widok z tarasu jest niesamowity! Jacuzzi to dodatek, który robi różnicę." },
+      { "author": "Magdalena R.", "rating": 4.5, "date": "2026-04-20", "text": "Świetna lokalizacja, wszystko w zasięgu spaceru. Mieszkanie piękne i czyste." },
+      { "author": "Tomasz B.", "rating": 5, "date": "2026-03-12", "text": "Idealne na romantyczny weekend. Polecam!" }
+    ]
   },
   {
     "id": "willa-morska",
@@ -28,9 +77,31 @@
     "rating": 4.7,
     "reviewsCount": 18,
     "distanceToBeach": 700,
+    "numberOfPeople": 8,
+    "status": "busy",
     "image": "/images/willa_morska.png",
     "featured": true,
-    "amenities": ["Basen", "Klimatyzacja", "Zwierzęta akceptowane", "Grill"]
+    "amenities": ["Basen", "Klimatyzacja", "Zwierzęta akceptowane", "Grill"],
+    "location": "Kołobrzeg-Podczele",
+    "description": "Przestronna willa dla dużych grup i rodzin z dziećmi, położona w spokojnej dzielnicy Podczele. Otoczona rozległym ogrodem z basenem i miejscem na grilla, zapewnia prywatność i swobodę. Dom może pomieścić do 8 osób, co czyni go idealnym wyborem na wspólny wypad rodziny czy grupy przyjaciół. Akceptujemy zwierzęta – Twój pupil również może cieszyć się wakacjami! Bliskość natury i cisza okolicy gwarantują prawdziwy odpoczynek z dala od zgiełku miasta.",
+    "gallery": [
+      "/images/willa_morska.png",
+      "/images/willa_morska.png",
+      "/images/willa_morska.png"
+    ],
+    "coordinates": { "lat": 54.1705, "lng": 15.5510 },
+    "rules": {
+      "checkIn": "14:00",
+      "checkOut": "12:00",
+      "minimumStay": 3,
+      "smoking": false,
+      "pets": true,
+      "parties": true
+    },
+    "reviews": [
+      { "author": "Rafał N.", "rating": 4.5, "date": "2026-05-20", "text": "Świetne miejsce na spotkanie ze znajomymi. Grill i basen robią robotę!" },
+      { "author": "Ewa J.", "rating": 5, "date": "2026-04-10", "text": "Polecam rodzinom z dziećmi. Dużo przestrzeni, ogród, akceptują zwierzaki." }
+    ]
   },
   {
     "id": "willa-baltic",
@@ -39,8 +110,35 @@
     "rating": 4.9,
     "reviewsCount": 41,
     "distanceToBeach": 250,
+    "numberOfPeople": 5,
+    "status": "free",
     "image": "/images/willa_baltic.png",
     "featured": true,
-    "amenities": ["Basen", "Sauna", "Taras", "Wi-Fi", "Parking"]
+    "amenities": ["Basen", "Sauna", "Taras", "Wi-Fi", "Parking"],
+    "location": "Kołobrzeg-Port",
+    "description": "Ekskluzywna willa tuż przy porcie, zaledwie 250 metrów od plaży. To nasz najbardziej popularny obiekt – bliskość morza i portowego klimatu przyciąga gości z całej Polski. Prywatny basen i sauna zapewniają relaks o każdej porze roku. Willa Baltic zachwyca przestronnym tarasem z widokiem na marinę, gdzie można podziwiać zachody słońca nad Bałtykiem. Wnętrza utrzymane w skandynawskim stylu z morskimi akcentami tworzą atmosferę prawdziwego nadmorskiego luksusu.",
+    "gallery": [
+      "/images/willa_baltic.png",
+      "/images/willa_baltic.png",
+      "/images/willa_baltic.png",
+      "/images/willa_baltic.png",
+      "/images/willa_baltic.png",
+      "/images/willa_baltic.png"
+    ],
+    "coordinates": { "lat": 54.1872, "lng": 15.5822 },
+    "rules": {
+      "checkIn": "16:00",
+      "checkOut": "11:00",
+      "minimumStay": 2,
+      "smoking": false,
+      "pets": true,
+      "parties": false
+    },
+    "reviews": [
+      { "author": "Agnieszka M.", "rating": 5, "date": "2026-06-18", "text": "Najlepsza willa w jakiej byliśmy! Widok na port, basen, sauna – wszystko na najwyższym poziomie." },
+      { "author": "Łukasz D.", "rating": 5, "date": "2026-06-01", "text": "Bliskość plaży (dosłownie 3 minuty spacerem!) i portowy klimat robią niesamowite wrażenie." },
+      { "author": "Joanna P.", "rating": 4.5, "date": "2026-05-08", "text": "Willla Baltic to strzał w dziesiątkę. Taras z widokiem na zachód słońca – bezcenny." },
+      { "author": "Michał G.", "rating": 5, "date": "2026-04-25", "text": "Profesjonalna obsługa, piękny wystrój, idealna lokalizacja. Polecam każdemu!" }
+    ]
   }
 ]

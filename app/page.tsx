@@ -49,8 +49,8 @@ function AppContent() {
 
         {/* Logo */}
         <div className="flex flex-col items-center leading-none">
-          <span className="text-[10px] font-bold tracking-[0.2em] text-accent uppercase">Wille</span>
-          <span className="text-sm font-extrabold tracking-[0.15em] text-primary dark:text-primary-foreground uppercase">
+          <span className="text-[10px] font-bold tracking-[0.2em]  uppercase">Wille</span>
+          <span className="text-sm font-extrabold tracking-[0.15em]  uppercase">
             Kołobrzeg
           </span>
         </div>
@@ -91,7 +91,7 @@ function AppContent() {
             sizes="(max-width: 480px) 100vw, 480px"
           />
           {/* Gradient nakładka dla czytelności tekstu */}
-          <div className="absolute inset-0 bg-gradient-to-b from-primary/60 via-primary/40 to-primary/80" />
+          <div className="absolute inset-0 bg-linear-to-b from-primary/60 via-primary/40 to-primary/80" />
 
           {/* Tekst hero */}
           <div className="absolute inset-0 flex flex-col justify-end p-6 pb-8">
@@ -196,7 +196,7 @@ function AppContent() {
               sizes="(max-width: 480px) 100vw, 480px"
             />
             {/* Gradient nakładka */}
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/85 to-primary/40" />
+            <div className="absolute inset-0 bg-linear-to-r from-primary/85 to-primary/40" />
 
             {/* Treść baneru */}
             <div className="absolute inset-0 flex flex-col justify-center p-6">

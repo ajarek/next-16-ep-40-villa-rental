@@ -1,49 +1,20 @@
-import React from "react";
-import { clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
+import * as React from "react"
+import { Input as InputPrimitive } from "@base-ui/react/input"
 
-type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
-  label?: string;
-  icon?: React.ReactNode;
-};
+import { cn } from "@/lib/utils"
 
-export default function Input({
-  className,
-  label,
-  icon,
-  type = "text",
-  id,
-  ...props
-}: InputProps) {
+function Input({ className, type, ...props }: React.ComponentProps<"input">) {
   return (
-    <div className="w-full flex flex-col gap-1.5">
-      {label && (
-        <label
-          htmlFor={id}
-          className="text-xs font-semibold text-muted uppercase tracking-wider pl-1"
-        >
-          {label}
-        </label>
+    <InputPrimitive
+      type={type}
+      data-slot="input"
+      className={cn(
+        "h-8 w-full min-w-0 rounded-lg border border-input bg-transparent px-2.5 py-1 text-base transition-colors outline-none file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-input/50 disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 md:text-sm dark:bg-input/30 dark:disabled:bg-input/80 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40",
+        className
       )}
-      <div className="relative flex items-center">
-        {icon && (
-          <div className="absolute left-4 text-muted pointer-events-none flex items-center justify-center">
-            {icon}
-          </div>
-        )}
-        <input
-          id={id}
-          type={type}
-          className={twMerge(
-            clsx(
-              "w-full bg-black/[0.02] dark:bg-white/[0.02] border border-border/80 rounded-xl py-3 text-sm transition-all focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/30 text-foreground placeholder:text-muted/60",
-              icon ? "pl-12 pr-4" : "px-4"
-            ),
-            className
-          )}
-          {...props}
-        />
-      </div>
-    </div>
-  );
+      {...props}
+    />
+  )
 }
+
+export { Input }
