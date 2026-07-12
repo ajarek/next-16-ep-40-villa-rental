@@ -65,7 +65,7 @@ export function DatePicker({
           />
         }
       >
-        <CalendarIcon className="w-5 h-5 text-accent dark:text-accent-foreground shrink-0" />
+        <CalendarIcon className="w-5 h-5  shrink-0" />
         <div className="flex flex-col min-w-0">
           {label && (
             <span className="text-[10px] font-bold text-muted uppercase tracking-wider">

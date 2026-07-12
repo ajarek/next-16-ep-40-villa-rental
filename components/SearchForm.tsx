@@ -67,9 +67,9 @@ export default function SearchForm() {
           onClick={() => setShowLocationDropdown(!showLocationDropdown)}
           className='flex items-center gap-4 px-4 py-3 rounded-2xl bg-black/2 dark:bg-white/2 border border-border/60 hover:border-accent/60 transition-colors cursor-pointer'
         >
-          <MapPin className='w-5 h-5 text-accent dark:text-accent-foreground shrink-0' />
+          <MapPin className='w-5 h-5  shrink-0' />
           <div className='flex flex-col'>
-            <span className='text-[10px] font-bold text-muted uppercase tracking-wider'>
+            <span className='text-[10px] font-bold  uppercase tracking-wider'>
               Lokalizacja
             </span>
             <span className='text-sm font-semibold text-foreground'>
@@ -95,7 +95,7 @@ export default function SearchForm() {
                   }}
                   className='px-4 py-3 text-sm hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer transition-colors text-foreground flex items-center gap-2'
                 >
-                  <MapPin className='w-4 h-4 text-muted' />
+                  <MapPin className='w-4 h-4 ' />
                   {loc}
                 </div>
               ))}
@@ -130,9 +130,9 @@ export default function SearchForm() {
           className='flex items-center justify-between px-4 py-3 rounded-2xl bg-black/2 dark:bg-white/2 border border-border/60 hover:border-accent/60 transition-colors cursor-pointer'
         >
           <div className='flex items-center gap-4'>
-            <Users className='w-5 h-5 text-accent dark:text-accent-foreground shrink-0' />
+            <Users className='w-5 h-5  dark:text-accent-foreground shrink-0' />
             <div className='flex flex-col'>
-              <span className='text-[10px] font-bold text-muted uppercase tracking-wider'>
+              <span className='text-[10px] font-bold  uppercase tracking-wider'>
                 Goście
               </span>
               <span className='text-sm font-semibold text-foreground'>
@@ -141,7 +141,7 @@ export default function SearchForm() {
               </span>
             </div>
           </div>
-          <ChevronDown className='w-5 h-5 text-muted transition-transform duration-200' />
+          <ChevronDown className='w-5 h-5  transition-transform duration-200' />
         </div>
 
         <AnimatePresence>
@@ -162,7 +162,7 @@ export default function SearchForm() {
                   onClick={() => setGuests((g) => g - 1)}
                   className='w-8 h-8 rounded-full border border-border flex items-center justify-center hover:bg-black/5 dark:hover:bg-white/5 disabled:opacity-30 disabled:pointer-events-none cursor-pointer'
                 >
-                  <Minus className='w-4 h-4 text-foreground' />
+                  <Minus className='w-4 h-4 ' />
                 </button>
                 <span className='font-semibold text-sm w-4 text-center text-foreground'>
                   {guests}
@@ -173,7 +173,7 @@ export default function SearchForm() {
                   onClick={() => setGuests((g) => g + 1)}
                   className='w-8 h-8 rounded-full border border-border flex items-center justify-center hover:bg-black/5 dark:hover:bg-white/5 disabled:opacity-30 disabled:pointer-events-none cursor-pointer'
                 >
-                  <Plus className='w-4 h-4 text-foreground' />
+                  <Plus className='w-4 h-4 ' />
                 </button>
               </div>
             </motion.div>
@@ -201,7 +201,7 @@ export default function SearchForm() {
           params.set("guests", guests.toString())
           router.push(`/villas?${params.toString()}`)
         }}
-        className='w-full py-4 text-sm font-semibold rounded-2xl flex items-center justify-center gap-2 bg-primary hover:bg-primary/95 text-white dark:bg-primary dark:hover:bg-primary/90 mt-2 cursor-pointer'
+        className='w-full py-4 text-sm font-semibold rounded-2xl flex items-center justify-center gap-2 bg-primary hover:bg-primary/95  dark:bg-primary dark:hover:bg-primary/90 mt-2 cursor-pointer'
       >
         <Search className='w-4 h-4' />
         Szukaj willi

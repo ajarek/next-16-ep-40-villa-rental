@@ -63,11 +63,11 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             animate={{ x: 0 }}
             exit={{ x: "-100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className='absolute top-0 bottom-0 left-0 w-4/5 max-w-[300px] bg-card text-card-foreground z-50 shadow-2xl flex flex-col p-6'
+            className='absolute top-0 bottom-0 left-0 w-4/5 max-w-75 bg-card text-card-foreground z-50 shadow-2xl flex flex-col p-6'
           >
             {/* Header Menu */}
             <div className='flex items-center justify-between mb-8'>
-              <span className='font-semibold text-lg tracking-wider text-primary dark:text-accent'>
+              <span className='font-semibold text-lg tracking-wider text-primary '>
                 WILLE KOŁOBRZEG
               </span>
               <button
@@ -75,7 +75,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 className='p-1 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors cursor-pointer'
                 aria-label='Zamknij menu'
               >
-                <X className='w-6 h-6 text-muted' />
+                <X className='w-6 h-6 text-foreground' />
               </button>
             </div>
 
@@ -92,7 +92,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                       className={`w-full flex items-center gap-4 px-4 py-3 rounded-xl text-left transition-all duration-200 cursor-pointer ${
                         item.active
                           ? "bg-primary text-primary-foreground dark:bg-accent dark:text-accent-foreground font-medium shadow-md shadow-primary/10"
-                          : "hover:bg-black/5 dark:hover:bg-white/5 text-muted hover:text-foreground"
+                          : "hover:bg-black/5 dark:hover:bg-white/5  hover:text-foreground"
                       }`}
                     >
                       <Icon className='w-5 h-5' />
@@ -109,7 +109,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                     className={`w-full flex items-center gap-4 px-4 py-3 rounded-xl text-left transition-all duration-200 cursor-pointer ${
                       item.active
                         ? "bg-primary text-primary-foreground dark:bg-accent dark:text-accent-foreground font-medium shadow-md shadow-primary/10"
-                        : "hover:bg-black/5 dark:hover:bg-white/5 text-muted hover:text-foreground"
+                        : "hover:bg-black/5 dark:hover:bg-white/5 hover:text-foreground"
                     }`}
                   >
                     <Icon className='w-5 h-5' />

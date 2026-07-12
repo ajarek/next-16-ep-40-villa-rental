@@ -373,7 +373,7 @@ function VillaDetailContent() {
           <h2 className="text-sm font-bold text-foreground mb-3">
             O tym obiekcie
           </h2>
-          <p className="text-xs text-muted leading-relaxed">
+          <p className="text-xs  leading-relaxed">
             {villa.description}
           </p>
         </section>

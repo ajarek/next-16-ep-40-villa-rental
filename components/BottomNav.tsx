@@ -41,14 +41,14 @@ export default function BottomNav() {
               <Icon
                 className={`w-5 h-5 transition-colors duration-200 ${
                   isActive
-                    ? "text-primary dark:text-primary-foreground font-semibold"
+                    ? " font-semibold"
                     : "text-muted group-hover:text-foreground"
                 }`}
               />
               <span
                 className={`text-[10px] tracking-wide transition-colors duration-200 ${
                   isActive
-                    ? "text-primary dark:text-primary-foreground font-semibold"
+                    ? "dark:text-primary-foreground font-semibold"
                     : "text-muted/80 group-hover:text-foreground"
                 }`}
               >
