@@ -107,11 +107,15 @@ function VillasCatalogContent() {
     if (!searchParams) return;
     const urlLocation = searchParams.get("location");
     const urlGuests = searchParams.get("guests");
+    const urlStatus = searchParams.get("status");
     if (urlLocation) {
       setFilters((prev) => ({ ...prev, location: urlLocation }));
     }
     if (urlGuests) {
       setMinGuests(Number(urlGuests));
+    }
+    if (urlStatus) {
+      setStatusFilter(urlStatus);
     }
   }, [searchParams]);
 
@@ -247,20 +251,20 @@ function VillasCatalogContent() {
         {/* Pasek wyszukiwania */}
         <div className="px-4 pb-3">
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted dark:text-muted-foreground/70" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Szukaj willi po nazwie..."
-              className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-black/5 dark:bg-white/5 border border-border/60 text-sm text-foreground placeholder:text-muted focus:outline-none focus:border-accent/60 transition-colors"
+              className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-black/5 dark:bg-white/5 border border-border/60 text-sm text-foreground placeholder:text-muted dark:placeholder:text-muted-foreground/70 focus:outline-none focus:border-accent/60 transition-colors"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery("")}
                 className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer"
               >
-                <X className="w-4 h-4 text-muted hover:text-foreground transition-colors" />
+                <X className="w-4 h-4 text-muted dark:text-muted-foreground/70 hover:text-foreground transition-colors" />
               </button>
             )}
           </div>
@@ -324,7 +328,7 @@ function VillasCatalogContent() {
             )}
             <button
               onClick={clearFilters}
-              className="shrink-0 text-xs text-muted hover:text-foreground underline cursor-pointer whitespace-nowrap"
+              className="shrink-0 text-xs text-muted dark:text-muted-foreground/70 hover:text-foreground underline cursor-pointer whitespace-nowrap"
             >
               Wyczyść wszystko
             </button>
@@ -333,7 +337,7 @@ function VillasCatalogContent() {
 
         {/* Sortowanie i liczba wyników */}
         <div className="flex items-center justify-between px-4 py-3">
-          <span className="text-xs text-muted">
+          <span className="text-xs text-muted dark:text-muted-foreground/70">
             {filteredVillas.length}{" "}
             {filteredVillas.length === 1 ? "willa" : "willi"}
           </span>
@@ -353,7 +357,7 @@ function VillasCatalogContent() {
                     : sortBy === "ocena"
                       ? "Najwyżej oceniane"
                       : "Najbliżej plaży"}
-              <ChevronDown className="w-3 h-3 text-muted" />
+              <ChevronDown className="w-3 h-3 text-muted dark:text-muted-foreground/70" />
             </button>
 
             <AnimatePresence>
@@ -402,7 +406,7 @@ function VillasCatalogContent() {
               <p className="text-sm font-medium text-foreground">
                 Brak willi spełniających kryteria
               </p>
-              <p className="text-xs text-muted">
+              <p className="text-xs text-muted dark:text-muted-foreground/70">
                 Spróbuj zmienić filtry lub wyszukiwanie
               </p>
               <button
@@ -446,7 +450,7 @@ function VillasCatalogContent() {
                             className={`w-3.5 h-3.5 transition-colors ${
                               isFavorite
                                 ? "fill-red-500 text-red-500"
-                                : "text-muted hover:text-red-400"
+                                : "text-muted dark:text-muted-foreground/70 hover:text-red-400"
                             }`}
                           />
                         </button>
@@ -468,7 +472,7 @@ function VillasCatalogContent() {
                           {villa.name}
                         </h3>
 
-                        <div className="flex items-center gap-1 text-[10px] text-muted">
+                        <div className="flex items-center gap-1 text-[10px] text-muted dark:text-muted-foreground/70">
                           <MapPin className="w-2.5 h-2.5 text-accent shrink-0" />
                           <span>{villa.distanceToBeach}m od plaży</span>
                         </div>
@@ -480,7 +484,7 @@ function VillasCatalogContent() {
                             return (
                               <span
                                 key={amenity}
-                                className="inline-flex items-center gap-0.5 px-1.5 py-0.5 bg-black/3 dark:bg-white/5 rounded-md text-[9px] text-muted"
+                                className="inline-flex items-center gap-0.5 px-1.5 py-0.5 bg-black/3 dark:bg-white/5 rounded-md text-[9px] text-muted dark:text-muted-foreground/70"
                               >
                                 <Icon className="w-2.5 h-2.5" />
                                 {amenity}
@@ -488,7 +492,7 @@ function VillasCatalogContent() {
                             );
                           })}
                           {villa.amenities.length > 3 && (
-                            <span className="text-[9px] text-muted">
+                            <span className="text-[9px] text-muted dark:text-muted-foreground/70">
                               +{villa.amenities.length - 3}
                             </span>
                           )}
@@ -500,7 +504,7 @@ function VillasCatalogContent() {
                           <span className="text-[10px] font-bold text-foreground">
                             {villa.rating}
                           </span>
-                          <span className="text-[9px] text-muted">
+                          <span className="text-[9px] text-muted dark:text-muted-foreground/70">
                             ({villa.reviewsCount})
                           </span>
                         </div>
@@ -542,7 +546,7 @@ function VillasCatalogContent() {
                   onClick={() => setShowFilters(false)}
                   className="p-1.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/10 transition-colors cursor-pointer"
                 >
-                  <X className="w-5 h-5 text-muted" />
+                  <X className="w-5 h-5 text-muted dark:text-muted-foreground/70" />
                 </button>
               </div>
 
@@ -582,7 +586,7 @@ function VillasCatalogContent() {
                   </h3>
                   <div className="flex items-center gap-3">
                     <div className="flex-1">
-                      <label className="text-[10px] text-muted block mb-1">
+                      <label className="text-[10px] text-muted dark:text-muted-foreground/70 block mb-1">
                         Od
                       </label>
                       <input
@@ -600,9 +604,9 @@ function VillasCatalogContent() {
                         step={50}
                       />
                     </div>
-                    <span className="text-muted mt-5">–</span>
+                    <span className="text-muted dark:text-muted-foreground/70 mt-5">–</span>
                     <div className="flex-1">
-                      <label className="text-[10px] text-muted block mb-1">
+                      <label className="text-[10px] text-muted dark:text-muted-foreground/70 block mb-1">
                         Do
                       </label>
                       <input
@@ -637,7 +641,7 @@ function VillasCatalogContent() {
                       }
                       className="w-full accent-accent"
                     />
-                    <div className="flex justify-between text-[10px] text-muted">
+                    <div className="flex justify-between text-[10px] text-muted dark:text-muted-foreground/70">
                       <span>0 zł</span>
                       <span>{filters.priceMax} zł</span>
                     </div>
@@ -702,7 +706,7 @@ function VillasCatalogContent() {
                         >
                           <Icon
                             className={`w-4 h-4 ${
-                              isActive ? "text-accent" : "text-muted"
+                              isActive ? "text-accent" : "text-muted dark:text-muted-foreground/70"
                             }`}
                           />
                           {amenity}

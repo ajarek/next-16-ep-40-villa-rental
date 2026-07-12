@@ -68,14 +68,14 @@ export function DatePicker({
         <CalendarIcon className="w-5 h-5  shrink-0" />
         <div className="flex flex-col min-w-0">
           {label && (
-            <span className="text-[10px] font-bold text-muted uppercase tracking-wider">
+            <span className="text-[10px] font-bold text-muted dark:text-muted-foreground/70 uppercase tracking-wider">
               {label}
             </span>
           )}
           <span
             className={cn(
               "text-sm font-semibold truncate",
-              value ? "text-foreground" : "text-muted"
+              value ? "text-foreground" : "text-muted dark:text-muted-foreground/70"
             )}
           >
             {value ? format(value, "d MMM yyyy", { locale: pl }) : placeholder}

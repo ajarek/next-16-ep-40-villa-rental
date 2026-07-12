@@ -121,7 +121,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
             {/* Stopka Menu */}
             <div className='pt-6 border-t border-border mt-auto'>
-              <p className='text-xs text-muted/60 text-center'>
+              <p className='text-xs text-muted/60 dark:text-muted-foreground/50 text-center'>
                 © 2026 Ville Kołobrzeg. Wszelkie prawa zastrzeżone.
               </p>
             </div>

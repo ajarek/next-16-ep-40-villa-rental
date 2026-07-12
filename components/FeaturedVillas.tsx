@@ -187,7 +187,7 @@ export default function FeaturedVillas() {
                         className={`w-4.5 h-4.5 transition-colors ${
                           isFavorite
                             ? "fill-red-500 text-red-500"
-                            : "text-muted hover:text-red-500"
+                            : "text-muted dark:text-muted-foreground/70 hover:text-red-500"
                         }`}
                       />
                     </motion.div>
@@ -200,7 +200,7 @@ export default function FeaturedVillas() {
                     <h3 className="font-bold text-sm text-foreground truncate">
                       {villa.name}
                     </h3>
-                    <div className="flex items-center gap-1 text-[11px] text-muted">
+                    <div className="flex items-center gap-1 text-[11px] text-muted dark:text-muted-foreground/70">
                       <MapPin className="w-3 h-3 text-accent shrink-0" />
                       <span>{villa.distanceToBeach} m od plaży</span>
                     </div>
@@ -209,11 +209,11 @@ export default function FeaturedVillas() {
                   {/* Cena i ocena */}
                   <div className="flex items-center justify-between mt-auto pt-2 border-t border-border/40">
                     <div className="flex items-baseline gap-0.5">
-                      <span className="text-xs text-muted">od</span>
+                      <span className="text-xs text-muted dark:text-muted-foreground/70">od</span>
                       <span className="text-sm font-bold text-foreground">
                         {villa.price} zł
                       </span>
-                      <span className="text-[10px] text-muted">/ noc</span>
+                      <span className="text-[10px] text-muted dark:text-muted-foreground/70">/ noc</span>
                     </div>
 
                     <div className="flex items-center gap-0.5">
@@ -221,7 +221,7 @@ export default function FeaturedVillas() {
                       <span className="text-xs font-bold text-foreground">
                         {villa.rating}
                       </span>
-                      <span className="text-[10px] text-muted">
+                      <span className="text-[10px] text-muted dark:text-muted-foreground/70">
                         ({villa.reviewsCount})
                       </span>
                     </div>

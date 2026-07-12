@@ -199,6 +199,7 @@ export default function SearchForm() {
             if (normalizedLocation) params.set("location", normalizedLocation)
           }
           params.set("guests", guests.toString())
+          params.set("status", "free")
           router.push(`/villas?${params.toString()}`)
         }}
         className='w-full py-4 text-sm font-semibold rounded-2xl flex items-center justify-center gap-2 bg-primary hover:bg-primary/95  dark:bg-primary dark:hover:bg-primary/90 mt-2 cursor-pointer'
