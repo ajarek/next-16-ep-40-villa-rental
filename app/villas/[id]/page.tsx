@@ -238,7 +238,7 @@ function VillaDetailContent() {
                 sizes="(max-width: 480px) 100vw, 480px"
               />
               {/* Gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20" />
+              <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-black/20" />
             </motion.div>
           </AnimatePresence>
 
@@ -422,17 +422,25 @@ function VillaDetailContent() {
           </div>
 
           {/* Stylizowana mapa */}
-          <div className="relative w-full h-[180px] rounded-2xl overflow-hidden bg-gradient-to-br from-primary/10 to-transparent border border-border/60">
+          <div className="relative w-full h-[180px] rounded-2xl overflow-hidden bg-linear-to-br from-primary/10 to-transparent border border-border/60">
             {/* Siatka mapy */}
-            <div
-              className="absolute inset-0 opacity-10"
-              style={{
-                backgroundImage:
-                  "linear-gradient(rgba(0,0,0,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.1) 1px, transparent 1px)",
-                backgroundSize: "40px 40px",
-              }}
-            />
-
+           <div
+  className="absolute inset-0 opacity-10 pointer-events-none"
+  style={{
+    background: `
+      radial-gradient(circle at center,
+        transparent 0,
+        transparent 120px,
+        rgba(59,130,246,0.08) 121px,
+        transparent 122px),
+      radial-gradient(circle at center,
+        transparent 0,
+        transparent 240px,
+        rgba(59,130,246,0.06) 241px,
+        transparent 242px)
+    `,
+  }}
+/>
             {/* Znacznik lokalizacji */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
               <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/30 animate-bounce">
@@ -602,11 +610,14 @@ function VillaDetailContent() {
             Masz pytania?
           </h2>
           <div className="flex gap-3">
-            <button className="flex-1 flex items-center justify-center gap-2 py-3 rounded-2xl bg-accent text-accent-foreground text-xs font-semibold hover:opacity-90 transition-opacity cursor-pointer">
+            <button
+              className="flex-1 flex items-center justify-center gap-2 py-3 rounded-2xl bg-accent text-accent-foreground text-xs font-semibold hover:opacity-90 transition-opacity cursor-pointer"
+              onClick={() => window.location.href = `tel:+48536128088`}
+            >
               <Phone className="w-4 h-4" />
               Zadzwoń
             </button>
-            <button className="flex-1 flex items-center justify-center gap-2 py-3 rounded-2xl bg-black/5 dark:bg-white/5 text-foreground text-xs font-semibold hover:bg-black/10 dark:hover:bg-white/10 transition-colors border border-border/60 cursor-pointer">
+            <button className="flex-1 flex items-center justify-center gap-2 py-3 rounded-2xl bg-black/5 dark:bg-white/5 text-foreground text-xs font-semibold hover:bg-black/10 dark:hover:bg-white/10 transition-colors border border-border/60 cursor-pointer" onClick={() => window.location.href = `mailto:ajarek@poczta.onet.pl`}>
               <MessageCircle className="w-4 h-4" />
               Napisz
             </button>
@@ -653,7 +664,7 @@ function VillaDetailContent() {
           <button
             onClick={() => setShowBookingForm(true)}
             disabled={villa.status !== "free"}
-            className="px-5 py-2.5 rounded-xl bg-accent text-accent-foreground text-xs font-bold hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+            className="px-5 py-2.5 rounded-xl bg-green-500 text-white text-xs font-bold hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
           >
             Rezerwuj
           </button>
