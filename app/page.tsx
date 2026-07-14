@@ -3,6 +3,7 @@
 import React, { useState } from "react"
 import Image from "next/image"
 import { Bell, Menu, Waves, Anchor, Wind, Star } from "lucide-react"
+import { useRouter } from "next/navigation"
 import { motion, type Variants, type Easing } from "framer-motion"
 
 import ThemeToggle from "@/components/ThemeToggle"
@@ -30,6 +31,7 @@ const fadeUpVariant: Variants = {
 }
 
 function AppContent() {
+  const router = useRouter()
   const [menuOpen, setMenuOpen] = useState(false)
 
   return (
@@ -214,6 +216,7 @@ function AppContent() {
               </p>
               <button
                 id='register-promo-button'
+                onClick={() => router.push('/auth')}
                 className='self-start bg-white dark:bg-black text-primary dark:text-white text-xs font-bold px-5 py-2.5 rounded-xl hover:bg-white/90 transition-colors cursor-pointer shadow-lg'
               >
                 Zarejestruj się

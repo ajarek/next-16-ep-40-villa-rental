@@ -9,6 +9,7 @@ import {
   MapPin,
   Heart,
   Share2,
+  Check,
   X,
   ChevronLeft,
   ChevronRight,
@@ -35,6 +36,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import BottomNav from "@/components/BottomNav";
 import { DatePicker } from "@/components/Picker";
+import { useRequireAuth } from "@/lib/use-require-auth";
 
 // ============================================================
 // TYPY
@@ -98,6 +100,7 @@ const amenityIcons: Record<string, React.ElementType> = {
 function VillaDetailContent() {
   const params = useParams();
   const router = useRouter();
+  const { requireAuth } = useRequireAuth();
   const [villa, setVilla] = useState<Villa | null>(null);
   const [loading, setLoading] = useState(true);
   const [isFavorite, setIsFavorite] = useState(false);
@@ -106,6 +109,7 @@ function VillaDetailContent() {
   const [checkOut, setCheckOut] = useState<Date | undefined>(undefined);
   const [guests, setGuests] = useState(2);
   const [showBookingForm, setShowBookingForm] = useState(false);
+  const [showConfirmation, setShowConfirmation] = useState(false);
 
   // Fetch villa data
   useEffect(() => {
@@ -194,7 +198,7 @@ function VillaDetailContent() {
         </button>
         <div className="flex items-center gap-2">
           <button
-            onClick={() => setIsFavorite(!isFavorite)}
+            onClick={() => requireAuth(() => setIsFavorite(!isFavorite))}
             className="w-9 h-9 rounded-full bg-black/40 backdrop-blur-md flex items-center justify-center hover:bg-black/60 transition-colors cursor-pointer"
             aria-label="Dodaj do ulubionych"
           >
@@ -662,7 +666,7 @@ function VillaDetailContent() {
             </span>
           </div>
           <button
-            onClick={() => setShowBookingForm(true)}
+            onClick={() => requireAuth(() => setShowBookingForm(true))}
             disabled={villa.status !== "free"}
             className="px-5 py-2.5 rounded-xl bg-green-500 text-white text-xs font-bold hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
           >
@@ -822,10 +826,8 @@ function VillaDetailContent() {
               <div className="px-5 py-4 border-t border-border/50">
                 <button
                   onClick={() => {
-                    alert(
-                      `Rezerwacja złożona! ${villa.name}, ${nightsCount} nocy, ${guests} gości. Łączna kwota: ${totalPrice + 200} zł. Dziękujemy!`
-                    );
                     setShowBookingForm(false);
+                    setShowConfirmation(true);
                   }}
                   disabled={!checkIn || !checkOut || nightsCount < villa.rules.minimumStay}
                   className="w-full py-3.5 rounded-2xl bg-accent text-accent-foreground text-sm font-bold hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer shadow-lg shadow-accent/20"
@@ -840,6 +842,150 @@ function VillaDetailContent() {
                   Nie ponosisz opłat do momentu potwierdzenia rezerwacji
                 </p>
               </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* ========== POTWIERDZENIE REZERWACJI (OVERLAY) ========== */}
+      <AnimatePresence>
+        {showConfirmation && (
+          <>
+            {/* Overlay */}
+            <motion.div
+              role="dialog"
+              aria-modal="true"
+              aria-label="Potwierdzenie rezerwacji"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="absolute inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-6"
+            >
+              {/* Karta potwierdzenia */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.8, y: 20 }}
+                transition={{ type: "spring", damping: 20, stiffness: 250, delay: 0.1 }}
+                className="w-full max-w-sm bg-card rounded-3xl shadow-2xl overflow-hidden"
+              >
+                {/* Górna sekcja z animacją */}
+                <div className="pt-10 pb-8 flex flex-col items-center bg-gradient-to-b from-emerald-500/10 to-transparent">
+                  {/* Animowany okrąg z checkmarkiem */}
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ type: "spring", damping: 15, stiffness: 200, delay: 0.2 }}
+                    className="w-20 h-20 rounded-full bg-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-500/30"
+                  >
+                    <motion.div
+                      initial={{ scale: 0, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ delay: 0.4, type: "spring", damping: 12 }}
+                    >
+                      <Check className="w-10 h-10 text-white" strokeWidth={3} />
+                    </motion.div>
+                  </motion.div>
+
+                  {/* Tekst potwierdzenia */}
+                  <motion.h2
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 }}
+                    className="text-lg font-extrabold text-foreground mt-5"
+                  >
+                    Rezerwacja potwierdzona!
+                  </motion.h2>
+                  <motion.p
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5 }}
+                    className="text-xs text-muted dark:text-muted-foreground/70 mt-1.5 text-center px-6"
+                  >
+                    {villa.name}
+                  </motion.p>
+                </div>
+
+                {/* Szczegóły rezerwacji */}
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 }}
+                  className="px-6 pb-2"
+                >
+                  <div className="bg-black/3 dark:bg-white/5 rounded-2xl p-4 space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[11px] text-muted dark:text-muted-foreground/70">Termin</span>
+                      <span className="text-[11px] font-semibold text-foreground">
+                        {checkIn && checkOut
+                          ? `${checkIn.toLocaleDateString("pl-PL", {
+                              day: "numeric",
+                              month: "short",
+                            })} – ${checkOut.toLocaleDateString("pl-PL", {
+                              day: "numeric",
+                              month: "short",
+                              year: "numeric",
+                            })}`
+                          : "—"}
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-[11px] text-muted dark:text-muted-foreground/70">Goście</span>
+                      <span className="text-[11px] font-semibold text-foreground">{guests} osób</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-[11px] text-muted dark:text-muted-foreground/70">Liczba nocy</span>
+                      <span className="text-[11px] font-semibold text-foreground">
+                        {nightsCount} {nightsCount === 1 ? "noc" : "noce"}
+                      </span>
+                    </div>
+                    <div className="border-t border-border/30 pt-3 flex items-center justify-between">
+                      <span className="text-xs font-bold text-foreground">Łączna kwota</span>
+                      <span className="text-sm font-extrabold text-emerald-500">
+                        {totalPrice + 200} zł
+                      </span>
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* Numer rezerwacji */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.6 }}
+                  className="px-6 py-3 flex items-center justify-center gap-2"
+                >
+                  <div className="w-1 h-1 rounded-full bg-foreground/20" />
+                  <span className="text-[9px] text-muted dark:text-muted-foreground/50 tracking-wider uppercase">
+                    Nr rezerwacji: {`VK-${String(Math.floor(Math.random() * 100000)).padStart(5, "0")}`}
+                  </span>
+                  <div className="w-1 h-1 rounded-full bg-foreground/20" />
+                </motion.div>
+
+                {/* Przycisk zamknięcia */}
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.7 }}
+                  className="px-6 pb-6 pt-2"
+                >
+                  <button
+                    onClick={() => {
+                      setShowConfirmation(false);
+                      setCheckIn(undefined);
+                      setCheckOut(undefined);
+                      setGuests(2);
+                    }}
+                    className="w-full py-3.5 rounded-2xl bg-accent text-accent-foreground text-sm font-bold hover:opacity-90 transition-opacity cursor-pointer shadow-lg shadow-accent/20"
+                  >
+                    Świetnie!
+                  </button>
+                  <p className="text-[9px] text-muted dark:text-muted-foreground/60 text-center mt-2.5">
+                    Potwierdzenie zostało wysłane na Twój e-mail
+                  </p>
+                </motion.div>
+              </motion.div>
             </motion.div>
           </>
         )}
