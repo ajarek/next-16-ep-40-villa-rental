@@ -14,7 +14,7 @@ export default function BottomNav() {
     { id: "search", label: "Szukaj", icon: Search, href: "/villas" },
     { id: "bookings", label: "Rezerwacje", icon: Calendar, href: "#" },
     { id: "favorites", label: "Ulubione", icon: Heart, href: "#" },
-    { id: "profile", label: "Profil", icon: User, href: "#" },
+    { id: "profile", label: "Profil", icon: User, href: "/profile" },
   ];
 
   return (

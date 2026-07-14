@@ -2,11 +2,12 @@
 
 import React, { useState } from "react"
 import Image from "next/image"
-import { Bell, Menu, Waves, Anchor, Wind, Star } from "lucide-react"
+import { Menu, Waves, Anchor, Wind, Star } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { motion, type Variants, type Easing } from "framer-motion"
 
 import ThemeToggle from "@/components/ThemeToggle"
+import UserMenu from "@/components/UserMenu"
 import MobileMenu from "@/components/MobileMenu"
 import SearchForm from "@/components/SearchForm"
 import FeaturedVillas from "@/components/FeaturedVillas"
@@ -58,17 +59,9 @@ function AppContent() {
           </span>
         </div>
 
-        <div className='flex items-center gap-2'>
+        <div className='flex items-center gap-1.5'>
           <ThemeToggle />
-          <button
-            id='notifications-button'
-            className='relative p-2 rounded-xl hover:bg-black/5 dark:hover:bg-white/10 transition-colors cursor-pointer'
-            aria-label='Powiadomienia'
-          >
-            <Bell className='w-6 h-6 text-foreground' />
-            {/* Badge powiadomień */}
-            <span className='absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border border-card' />
-          </button>
+          <UserMenu />
         </div>
       </header>
 
