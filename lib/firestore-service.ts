@@ -39,7 +39,7 @@ export type BookingData = {
   nightsCount: number;
   totalPrice: number;
   createdAt: Timestamp;
-  status: "confirmed" | "cancelled" | "completed";
+  status: "pending" | "confirmed" | "cancelled" | "completed";
 };
 
 // ============================================================

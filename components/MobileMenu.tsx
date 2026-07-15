@@ -8,11 +8,9 @@ import {
   X,
   Home,
   Search,
-  Calendar,
-  Heart,
+  Phone,
+  MessageSquareText,
   User,
-  Settings,
-  HelpCircle,
   Building2,
   LogOut,
   LogIn,
@@ -44,11 +42,9 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
     { name: "Strona główna", icon: Home, href: "/", active: true },
     { name: "Wille", icon: Building2, href: "/villas" },
     { name: "Szukaj", icon: Search, href: "/villas" },
-    { name: "Moje rezerwacje", icon: Calendar, href: "#" },
-    { name: "Ulubione", icon: Heart, href: "#" },
+    { name: "Kontakt", icon: Phone, href: "/contact" },
+    { name: "Opinie", icon: MessageSquareText, href: "/opinions" },
     { name: "Profil", icon: User, href: "/profile", protected: true },
-    { name: "Ustawienia", icon: Settings, href: "#" },
-    { name: "Pomoc i kontakt", icon: HelpCircle, href: "#" },
   ]
 
   const handleProtectedNav = (href: string) => {

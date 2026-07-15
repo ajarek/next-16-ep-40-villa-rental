@@ -2,7 +2,18 @@
 
 import React, { useState } from "react"
 import Image from "next/image"
-import { Menu, Waves, Anchor, Wind, Star } from "lucide-react"
+import {
+  Menu,
+  Waves,
+  Anchor,
+  Wind,
+  Star,
+  Search,
+  Calendar,
+  CreditCard,
+  CheckCircle2,
+  ArrowRight,
+} from "lucide-react"
 import { useRouter } from "next/navigation"
 import { motion, type Variants, type Easing } from "framer-motion"
 
@@ -172,6 +183,117 @@ function AppContent() {
                   </motion.div>
                 )
               })}
+            </div>
+          </motion.div>
+        </div>
+
+        {/* --- SEKCJA "JAK TO DZIAŁA?" – PROCES PŁATNOŚCI --- */}
+        <div className='px-4 mt-8'>
+          <motion.div
+            custom={8}
+            variants={fadeUpVariant}
+            initial='hidden'
+            animate='visible'
+            className='flex flex-col gap-4'
+          >
+            <div className='flex items-center justify-between px-1'>
+              <h2 className='text-lg font-bold text-foreground tracking-tight'>
+                Proces płatności
+              </h2>
+              <button
+                onClick={() => router.push("/payment")}
+                className='text-[10px] font-semibold text-accent-foreground bg-accent/10 px-3 py-1.5 rounded-lg hover:bg-accent/20 transition-colors cursor-pointer'
+              >
+                Sprawdź
+              </button>
+            </div>
+
+            <div className='relative bg-card border border-border/80 rounded-3xl p-5 shadow-sm overflow-hidden'>
+              {/* Dekoracyjne tło */}
+              <div className='absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full blur-3xl pointer-events-none' />
+
+              <div className='flex flex-col gap-0 relative'>
+                {[
+                  {
+                    icon: Search,
+                    title: "Znajdź willę",
+                    desc: "Przeglądaj katalog i wybierz idealny obiekt",
+                    color: "bg-blue-500/10 text-blue-500",
+                  },
+                  {
+                    icon: Calendar,
+                    title: "Wybierz termin",
+                    desc: "Określ daty pobytu i liczbę gości",
+                    color: "bg-violet-500/10 text-violet-500",
+                  },
+                  {
+                    icon: CreditCard,
+                    title: "Zapłać online",
+                    desc: "BLIK, karta, Apple Pay, Google Pay lub Przelewy24",
+                    color: "bg-emerald-500/10 text-emerald-500",
+                  },
+                  {
+                    icon: CheckCircle2,
+                    title: "Ciesz się pobytem",
+                    desc: "Otrzymasz potwierdzenie z kodem QR",
+                    color: "bg-amber-500/10 text-amber-500",
+                  },
+                ].map((step, i) => (
+                  <div key={i} className='flex items-start gap-4 py-3'>
+                    {/* Numer i linia łącząca */}
+                    <div className='flex flex-col items-center'>
+                      <div
+                        className={`w-10 h-10 rounded-xl ${step.color} flex items-center justify-center shadow-sm shrink-0`}
+                      >
+                        <step.icon className='w-5 h-5' />
+                      </div>
+                      {i < 3 && (
+                        <div className='w-0.5 h-6 bg-border/60 mt-1' />
+                      )}
+                    </div>
+
+                    {/* Treść */}
+                    <div className='flex-1 min-w-0 pt-1'>
+                      <div className='flex items-center gap-2'>
+                        <span className='text-[10px] font-bold text-muted dark:text-muted-foreground/50'>
+                          Krok {i + 1}
+                        </span>
+                      </div>
+                      <h3 className='text-sm font-bold text-foreground mt-0.5'>
+                        {step.title}
+                      </h3>
+                      <p className='text-[11px] text-muted dark:text-muted-foreground/70 mt-0.5 leading-relaxed'>
+                        {step.desc}
+                      </p>
+                    </div>
+
+                    {/* Strzałka (oprócz ostatniego) */}
+                    {i < 3 && (
+                      <div className='hidden sm:flex items-center self-center ml-2'>
+                        <ArrowRight className='w-4 h-4 text-muted dark:text-muted-foreground/30' />
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              {/* Dolny pasek z informacją o bezpieczeństwie */}
+              <div className='mt-2 pt-3 border-t border-border/40 flex items-center gap-2'>
+                <div className='flex -space-x-1'>
+                  <div className='w-5 h-5 rounded-full bg-blue-500/20 flex items-center justify-center'>
+                    <span className='text-[6px] font-bold text-blue-500'>V</span>
+                  </div>
+                  <div className='w-5 h-5 rounded-full bg-red-500/20 flex items-center justify-center'>
+                    <span className='text-[6px] font-bold text-red-500'>MC</span>
+                  </div>
+                  <div className='w-5 h-5 rounded-full bg-yellow-500/20 flex items-center justify-center'>
+                    <span className='text-[5px] font-bold text-yellow-600'>BLIK</span>
+                  </div>
+                </div>
+                <span className='text-[9px] text-muted dark:text-muted-foreground/50'>
+                  Bezpieczne płatności · SSL szyfrowane
+                </span>
+              </div>
             </div>
           </motion.div>
         </div>

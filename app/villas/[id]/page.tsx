@@ -870,6 +870,26 @@ function VillaDetailContent() {
                   onClick={async () => {
                     if (!user || !villa || !checkIn || !checkOut) return;
 
+                    // Zapisz dane rezerwacji w sessionStorage i przejdź do płatności
+                    const bookingData = {
+                      villaId: villa.id,
+                      villaName: villa.name,
+                      villaImage: villa.image,
+                      villaPrice: villa.price,
+                      checkIn: checkIn.toISOString(),
+                      checkOut: checkOut.toISOString(),
+                      guests,
+                      nightsCount,
+                      totalPrice: totalPrice + 200,
+                    };
+
+                    if (typeof window !== "undefined") {
+                      sessionStorage.setItem(
+                        "pendingBooking",
+                        JSON.stringify(bookingData)
+                      );
+                    }
+
                     // Zapisz rezerwację w Firestore
                     try {
                       await addBooking(user.uid, {
@@ -881,26 +901,28 @@ function VillaDetailContent() {
                         guests,
                         nightsCount,
                         totalPrice: totalPrice + 200,
-                        status: "confirmed",
+                        status: "pending",
                       });
                     } catch {
                       // Jeśli Firestore nie działa – rezerwacja mimo to się pokaże
                     }
 
                     setShowBookingForm(false);
-                    setShowConfirmation(true);
+                    router.push(
+                      `/payment?villaId=${villa.id}&villaName=${encodeURIComponent(villa.name)}&villaImage=${encodeURIComponent(villa.image)}&villaPrice=${villa.price}&checkIn=${checkIn.toISOString()}&checkOut=${checkOut.toISOString()}&guests=${guests}&nightsCount=${nightsCount}&totalPrice=${totalPrice + 200}`
+                    );
                   }}
                   disabled={!checkIn || !checkOut || nightsCount < villa.rules.minimumStay}
-                  className="w-full py-3.5 rounded-2xl bg-accent text-accent-foreground text-sm font-bold hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer shadow-lg shadow-accent/20"
+                  className="w-full py-3.5 rounded-2xl bg-foreground text-background text-sm font-bold hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer shadow-lg"
                 >
                   {!checkIn || !checkOut
                     ? "Wybierz daty"
                     : nightsCount < villa.rules.minimumStay
                       ? `Min. pobyt: ${villa.rules.minimumStay} noce`
-                      : `Rezerwuj – ${totalPrice + 200} zł`}
+                      : `Kontynuuj – ${totalPrice + 200} zł`}
                 </button>
                 <p className="text-[9px] text-muted dark:text-muted-foreground/60 text-center mt-2">
-                  Nie ponosisz opłat do momentu potwierdzenia rezerwacji
+                  Przejdziesz do bezpiecznej płatności
                 </p>
               </div>
             </motion.div>
