@@ -5,21 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Heart, Star, MapPin, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
-
-type Villa = {
-  id: string;
-  name: string;
-  price: number;
-  rating: number;
-  reviewsCount: number;
-  distanceToBeach: number;
-  numberOfPeople: number;
-  status: string;
-  image: string;
-  featured: boolean;
-  amenities: string[];
-  location: string;
-};
+import type { Villa } from "@/types/villa";
 
 export default function FeaturedVillas() {
   const [villas, setVillas] = useState<Villa[]>([]);

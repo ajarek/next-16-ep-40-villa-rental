@@ -44,44 +44,7 @@ import {
   isFavorite as checkIsFavorite,
   addBooking,
 } from "@/lib/firestore-service";
-
-// ============================================================
-// TYPY
-// ============================================================
-
-type Review = {
-  author: string;
-  rating: number;
-  date: string;
-  text: string;
-};
-
-type Villa = {
-  id: string;
-  name: string;
-  price: number;
-  rating: number;
-  reviewsCount: number;
-  distanceToBeach: number;
-  numberOfPeople: number;
-  status: string;
-  image: string;
-  featured: boolean;
-  amenities: string[];
-  location: string;
-  description: string;
-  gallery: string[];
-  coordinates: { lat: number; lng: number };
-  rules: {
-    checkIn: string;
-    checkOut: string;
-    minimumStay: number;
-    smoking: boolean;
-    pets: boolean;
-    parties: boolean;
-  };
-  reviews: Review[];
-};
+import type { Villa, Review } from "@/types/villa";
 
 // ============================================================
 // MAPOWANIE IKON UDOGODNIEŃ

@@ -18,6 +18,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@/lib/auth-context";
 import BottomNav from "@/components/BottomNav";
+import type { AuthMode } from "@/types/auth";
 
 // ============================================================
 // STAŁE
@@ -27,8 +28,6 @@ const AUTH_MODES = {
   LOGIN: "login",
   REGISTER: "register",
 } as const;
-
-type AuthMode = (typeof AUTH_MODES)[keyof typeof AUTH_MODES];
 
 // ============================================================
 // GŁÓWNY KOMPONENT

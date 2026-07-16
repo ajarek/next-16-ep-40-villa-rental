@@ -25,13 +25,7 @@ import {
 } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import BottomNav from "@/components/BottomNav"
-
-type ContactSubject = "rezerwacja" | "pytanie" | "reklamacja" | "wspolpraca" | "inny"
-type FaqItem = {
-  q: string
-  a: string
-  category: string
-}
+import type { ContactSubject, FaqItem } from "@/types/contact"
 
 const contactReasons: { id: ContactSubject; label: string }[] = [
   { id: "rezerwacja", label: "Problem z rezerwacją" },

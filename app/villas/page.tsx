@@ -25,21 +25,7 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import BottomNav from "@/components/BottomNav";
-
-type Villa = {
-  id: string;
-  name: string;
-  price: number;
-  rating: number;
-  reviewsCount: number;
-  distanceToBeach: number;
-  numberOfPeople: number;
-  status: string;
-  image: string;
-  featured: boolean;
-  amenities: string[];
-  location: string;
-};
+import type { Villa, SortOption, Filters } from "@/types/villa";
 
 const amenityIcons: Record<string, React.ElementType> = {
   Basen: Waves,
@@ -73,15 +59,6 @@ const locations = [
   "Kołobrzeg-Podczele",
   "Kołobrzeg-Port",
 ];
-
-type SortOption = "popularne" | "cena-rosnąco" | "cena-malejąco" | "ocena" | "odległość";
-
-type Filters = {
-  priceMin: number;
-  priceMax: number;
-  amenities: string[];
-  location: string;
-};
 
 function VillasCatalogContent() {
   const router = useRouter();

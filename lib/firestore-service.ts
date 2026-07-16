@@ -8,39 +8,10 @@ import {
   query,
   where,
   serverTimestamp,
-  type Timestamp,
 } from "firebase/firestore";
 import { db } from "./firebase";
-
-// ============================================================
-// TYPY
-// ============================================================
-
-export type VillaData = {
-  id: string;
-  name: string;
-  price: number;
-  rating: number;
-  image: string;
-  location: string;
-  distanceToBeach: number;
-  numberOfPeople: number;
-  status: string;
-};
-
-export type BookingData = {
-  id: string;
-  villaId: string;
-  villaName: string;
-  villaImage: string;
-  checkIn: string;
-  checkOut: string;
-  guests: number;
-  nightsCount: number;
-  totalPrice: number;
-  createdAt: Timestamp;
-  status: "pending" | "confirmed" | "cancelled" | "completed";
-};
+import type { VillaData } from "@/types/villa";
+import type { BookingData } from "@/types/booking";
 
 // ============================================================
 // ULUBIONE

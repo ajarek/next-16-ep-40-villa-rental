@@ -20,21 +20,7 @@ import {
 } from "lucide-react"
 import { motion, AnimatePresence, type Easing } from "framer-motion"
 import BottomNav from "@/components/BottomNav"
-
-type BookingData = {
-  villaId: string
-  villaName: string
-  villaImage: string
-  villaPrice: number
-  checkIn: string
-  checkOut: string
-  guests: number
-  nightsCount: number
-  totalPrice: number
-}
-
-type PaymentMethod = "card" | "blik" | "apple" | "google" | "przelewy24"
-type PaymentStep = "podsumowanie" | "platnosc" | "potwierdzenie"
+import type { BookingFormData, PaymentMethod, PaymentStep } from "@/types/booking"
 
 const paymentMethods: {
   id: PaymentMethod
@@ -73,11 +59,11 @@ function PaymentContent() {
   const [agreed, setAgreed] = useState(false)
   const [showRegulations, setShowRegulations] = useState(false)
 
-  const [booking] = useState<BookingData | null>(() => {
+  const [booking] = useState<BookingFormData | null>(() => {
     if (typeof window === "undefined") return null
     const stored = sessionStorage.getItem("pendingBooking")
     if (stored) {
-      try { return JSON.parse(stored) as BookingData }
+      try { return JSON.parse(stored) as BookingFormData }
       catch { /* empty */ }
     }
     const id = searchParams?.get("villaId")
@@ -92,7 +78,7 @@ function PaymentContent() {
       guests: Number(searchParams?.get("guests") || 2),
       nightsCount: Number(searchParams?.get("nightsCount") || 1),
       totalPrice: Number(searchParams?.get("totalPrice") || 0),
-    } as BookingData
+    } as BookingFormData
   })
 
   const formatCardNumber = useCallback((value: string) => {

@@ -16,11 +16,7 @@ import {
   LogIn,
 } from "lucide-react"
 import { useAuth } from "@/lib/auth-context"
-
-type MobileMenuProps = {
-  isOpen: boolean
-  onClose: () => void
-}
+import type { MobileMenuProps } from "@/types/components"
 
 export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const { user, initialized, logout } = useAuth()

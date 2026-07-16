@@ -12,25 +12,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
-
-interface DatePickerProps {
-  /** Nazwa pola — przekazywana do ukrytego inputa, umożliwia użycie w formularzu */
-  name: string
-  /** Aktualnie wybrana data */
-  value?: Date
-  /** Wywoływane po zmianie daty */
-  onChange?: (date: Date | undefined) => void
-  /** Etykieta wyświetlana nad przyciskiem */
-  label?: string
-  /** Tekst zastępczy gdy nie wybrano daty */
-  placeholder?: string
-  /** Minimalna dozwolona data (wcześniejsze są zablokowane) */
-  fromDate?: Date
-  /** Klasa CSS nadpisująca styl triggera */
-  className?: string
-  /** Wyrównanie popovera (start = lewa krawędź, end = prawa krawędź, center = środek) */
-  popoverAlign?: "start" | "center" | "end"
-}
+import type { DatePickerProps } from "@/types/components"
 
 export function DatePicker({
   name,

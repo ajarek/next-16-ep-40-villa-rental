@@ -17,31 +17,9 @@ import {
   sendPasswordResetEmail,
   GoogleAuthProvider,
   signInWithPopup,
-  type User,
 } from "firebase/auth";
 import { auth } from "./firebase";
-
-// ============================================================
-// TYPY
-// ============================================================
-
-type AuthState = {
-  user: User | null;
-  loading: boolean;
-  initialized: boolean;
-};
-
-type AuthContextType = AuthState & {
-  login: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
-  register: (
-    email: string,
-    password: string,
-    name: string
-  ) => Promise<{ success: boolean; error?: string }>;
-  logout: () => Promise<void>;
-  resetPassword: (email: string) => Promise<{ success: boolean; error?: string }>;
-  loginWithGoogle: () => Promise<{ success: boolean; error?: string }>;
-};
+import type { AuthState, AuthContextType } from "@/types/auth";
 
 // ============================================================
 // KONTEKST

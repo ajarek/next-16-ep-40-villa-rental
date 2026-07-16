@@ -21,7 +21,9 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useAuth } from "@/lib/auth-context";
-import { getFavorites, getBookings, type VillaData, type BookingData } from "@/lib/firestore-service";
+import { getFavorites, getBookings } from "@/lib/firestore-service";
+import type { VillaData } from "@/types/villa";
+import type { BookingData } from "@/types/booking";
 import BottomNav from "@/components/BottomNav";
 
 function ProfileContent() {
