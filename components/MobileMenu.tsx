@@ -101,7 +101,9 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                   <div className='flex items-center gap-3'>
                     <div className='w-10 h-10 rounded-full bg-foreground/10 flex items-center justify-center shrink-0'>
                       <span className='text-sm font-bold text-foreground'>
-                        {(user.displayName || user.email || "U").charAt(0).toUpperCase()}
+                        {(user.displayName || user.email || "U")
+                          .charAt(0)
+                          .toUpperCase()}
                       </span>
                     </div>
                     <div className='min-w-0 flex-1'>

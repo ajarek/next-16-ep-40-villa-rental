@@ -14,7 +14,11 @@ export default function ThemeToggle() {
   const { theme, toggleTheme } = useTheme()
   // useSyncExternalStore zwraca wartość serwerową (false) podczas SSR
   // i wartość kliencką (true) po montowaniu — bez dodatkowego cyklu renderowania
-  const mounted = useSyncExternalStore(subscribe, () => true, () => false)
+  const mounted = useSyncExternalStore(
+    subscribe,
+    () => true,
+    () => false,
+  )
 
   // Dopóki nie nastąpi hydracja, renderujemy pusty placeholder (zgodny z SSR)
   // aby uniknąć błędu hydracji (mismatch między serverem a klientem).

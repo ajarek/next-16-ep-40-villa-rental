@@ -247,9 +247,7 @@ function AppContent() {
                       >
                         <step.icon className='w-5 h-5' />
                       </div>
-                      {i < 3 && (
-                        <div className='w-0.5 h-6 bg-border/60 mt-1' />
-                      )}
+                      {i < 3 && <div className='w-0.5 h-6 bg-border/60 mt-1' />}
                     </div>
 
                     {/* Treść */}
@@ -281,13 +279,19 @@ function AppContent() {
               <div className='mt-2 pt-3 border-t border-border/40 flex items-center gap-2'>
                 <div className='flex -space-x-1'>
                   <div className='w-5 h-5 rounded-full bg-blue-500/20 flex items-center justify-center'>
-                    <span className='text-[6px] font-bold text-blue-500'>V</span>
+                    <span className='text-[6px] font-bold text-blue-500'>
+                      V
+                    </span>
                   </div>
                   <div className='w-5 h-5 rounded-full bg-red-500/20 flex items-center justify-center'>
-                    <span className='text-[6px] font-bold text-red-500'>MC</span>
+                    <span className='text-[6px] font-bold text-red-500'>
+                      MC
+                    </span>
                   </div>
                   <div className='w-5 h-5 rounded-full bg-yellow-500/20 flex items-center justify-center'>
-                    <span className='text-[5px] font-bold text-yellow-600'>BLIK</span>
+                    <span className='text-[5px] font-bold text-yellow-600'>
+                      BLIK
+                    </span>
                   </div>
                 </div>
                 <span className='text-[9px] text-muted dark:text-muted-foreground/50'>
@@ -331,7 +335,7 @@ function AppContent() {
               </p>
               <button
                 id='register-promo-button'
-                onClick={() => router.push('/auth')}
+                onClick={() => router.push("/auth")}
                 className='self-start bg-white dark:bg-black text-primary dark:text-white text-xs font-bold px-5 py-2.5 rounded-xl hover:bg-white/90 transition-colors cursor-pointer shadow-lg'
               >
                 Zarejestruj się

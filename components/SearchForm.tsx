@@ -2,14 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react"
 import { useRouter } from "next/navigation"
-import {
-  MapPin,
-  Users,
-  ChevronDown,
-  Search,
-  Plus,
-  Minus,
-} from "lucide-react"
+import { MapPin, Users, ChevronDown, Search, Plus, Minus } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { DatePicker } from "./Picker"
@@ -17,8 +10,12 @@ import { DatePicker } from "./Picker"
 export default function SearchForm() {
   const router = useRouter()
   const [location, setLocation] = useState("Kołobrzeg, Polska")
-  const [checkIn, setCheckIn] = useState<Date | undefined>(new Date(2025, 5, 15))
-  const [checkOut, setCheckOut] = useState<Date | undefined>(new Date(2025, 5, 22))
+  const [checkIn, setCheckIn] = useState<Date | undefined>(
+    new Date(2025, 5, 15),
+  )
+  const [checkOut, setCheckOut] = useState<Date | undefined>(
+    new Date(2025, 5, 22),
+  )
   const [guests, setGuests] = useState(2)
 
   // Stany otwarcia dropdownów
