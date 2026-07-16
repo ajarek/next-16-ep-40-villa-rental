@@ -13,7 +13,7 @@ export default function BottomNav() {
     { id: "home", label: "Główna", icon: Home, href: "/" },
     { id: "search", label: "Szukaj", icon: Search, href: "/villas" },
     { id: "contact", label: "Kontakt", icon: Phone, href: "/contact" },
-    { id: "opinions", label: "Opinie", icon: MessageSquareText, href: "/opinions" },
+    { id: "testimonials", label: "Opinie", icon: MessageSquareText, href: "/testimonials" },
     { id: "profile", label: "Profil", icon: User, href: "/profile" },
   ]
 

@@ -43,7 +43,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
     { name: "Wille", icon: Building2, href: "/villas" },
     { name: "Szukaj", icon: Search, href: "/villas" },
     { name: "Kontakt", icon: Phone, href: "/contact" },
-    { name: "Opinie", icon: MessageSquareText, href: "/opinions" },
+    { name: "Opinie", icon: MessageSquareText, href: "/testimonials" },
     { name: "Profil", icon: User, href: "/profile", protected: true },
   ]
 
