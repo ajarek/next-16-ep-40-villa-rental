@@ -1,7 +1,6 @@
 "use client"
 
 import React, { useEffect } from "react"
-import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import {
@@ -14,13 +13,16 @@ import {
   Building2,
   LogOut,
   LogIn,
+  LayoutDashboard,
 } from "lucide-react"
 import { useAuth } from "@/lib/auth-context"
+import { isAdminUser } from "@/lib/admin"
 import type { MobileMenuProps } from "@/types/components"
 
 export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const { user, initialized, logout } = useAuth()
   const router = useRouter()
+  const isAdmin = isAdminUser(user)
 
   // Blokowanie przewijania strony pod menu, gdy jest otwarte
   useEffect(() => {
@@ -41,6 +43,18 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
     { name: "Kontakt", icon: Phone, href: "/contact" },
     { name: "Opinie", icon: MessageSquareText, href: "/testimonials" },
     { name: "Profil", icon: User, href: "/profile", protected: true },
+    // Link do panelu widoczny wyłącznie dla administratora
+    ...(isAdmin
+      ? [
+          {
+            name: "Panel admina",
+            icon: LayoutDashboard,
+            href: "/dashboard",
+            protected: true,
+            adminOnly: true,
+          },
+        ]
+      : []),
   ]
 
   const handleProtectedNav = (href: string) => {

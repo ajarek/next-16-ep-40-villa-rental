@@ -1,7 +1,10 @@
 import type { Timestamp } from "firebase/firestore"
 
+export type BookingStatus = "pending" | "confirmed" | "cancelled" | "completed"
+
 export type BookingData = {
   id: string
+  userId?: string
   villaId: string
   villaName: string
   villaImage: string
@@ -11,7 +14,7 @@ export type BookingData = {
   nightsCount: number
   totalPrice: number
   createdAt: Timestamp
-  status: "pending" | "confirmed" | "cancelled" | "completed"
+  status: BookingStatus
 }
 
 export type BookingFormData = {

@@ -171,6 +171,20 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
+### Panel administratora
+
+Strona `/dashboard` umożliwia zarządzanie danymi Firestore (rezerwacje i ulubione). Link pojawia się w menu mobilnym wyłącznie dla administratorów.
+
+**Główny administrator:** `ajarek2101@gmail.com` (konto w Firebase Authentication).
+
+Opcjonalnie dodatkowe e-maile w `.env.local`:
+
+```bash
+NEXT_PUBLIC_ADMIN_EMAILS=inny@example.com
+```
+
+Reguły Firestore: plik `firestore.rules` — wklej do Firebase Console → Firestore → Rules i opublikuj.
+
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
 ## Learn More

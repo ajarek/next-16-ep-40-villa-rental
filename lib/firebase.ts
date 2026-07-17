@@ -15,6 +15,11 @@ import { getFirestore, Firestore } from "firebase/firestore";
 //   NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=123456789
 //   NEXT_PUBLIC_FIREBASE_APP_ID=1:123456789:web:abc123
 //
+//   # Opcjonalnie – dodatkowe e-maile administratorów (panel /dashboard):
+//   NEXT_PUBLIC_ADMIN_EMAILS=inny@example.com
+//
+// Główny admin (wbudowany w lib/admin.ts): ajarek2101@gmail.com
+//
 // ============================================================
 
 const firebaseConfig = {
