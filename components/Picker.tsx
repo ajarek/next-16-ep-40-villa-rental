@@ -28,14 +28,12 @@ export function DatePicker({
 
   return (
     <Popover>
-      {/* Ukryty input pozwala odczytać wartość przy submit formularza */}
       <input
         type='hidden'
         name={name}
         value={value ? format(value, "yyyy-MM-dd") : ""}
       />
 
-      {/* Base UI PopoverTrigger używa render prop zamiast asChild */}
       <PopoverTrigger
         render={
           <button
@@ -73,7 +71,6 @@ export function DatePicker({
         side='top'
         sideOffset={8}
       >
-        {/* react-day-picker v10: disabled zamiast fromDate */}
         <Calendar
           mode='single'
           selected={value}

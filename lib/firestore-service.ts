@@ -21,10 +21,6 @@ import type {
   UserRole,
 } from "@/types/dashboard"
 
-// ============================================================
-// ULUBIONE
-// ============================================================
-
 const FAVORITES_COLLECTION = "favorites"
 
 export async function addFavorite(
@@ -70,10 +66,6 @@ export async function isFavorite(
   return snap.exists()
 }
 
-// ============================================================
-// REZERWACJE
-// ============================================================
-
 const BOOKINGS_COLLECTION = "bookings"
 
 export async function addBooking(
@@ -101,13 +93,7 @@ export async function getBookings(userId: string): Promise<BookingData[]> {
   return snapshot.docs.map((d) => d.data() as BookingData)
 }
 
-// ============================================================
-// PANEL ADMINISTRATORA
-// ============================================================
 
-/**
- * Pobiera wszystkie rezerwacje (dla panelu administratora).
- */
 export async function getAllBookings(): Promise<BookingData[]> {
   if (!db) return []
   const snapshot = await getDocs(collection(db, BOOKINGS_COLLECTION))
@@ -115,7 +101,6 @@ export async function getAllBookings(): Promise<BookingData[]> {
     const data = d.data() as BookingData
     return { ...data, id: data.id || d.id }
   })
-  // Sortowanie po dacie utworzenia (najnowsze na górze)
   return bookings.sort((a, b) => {
     const aTime = a.createdAt?.toMillis?.() ?? 0
     const bTime = b.createdAt?.toMillis?.() ?? 0
@@ -123,9 +108,7 @@ export async function getAllBookings(): Promise<BookingData[]> {
   })
 }
 
-/**
- * Aktualizuje status rezerwacji.
- */
+
 export async function updateBookingStatus(
   bookingId: string,
   status: BookingStatus,
@@ -134,17 +117,13 @@ export async function updateBookingStatus(
   await updateDoc(doc(db, BOOKINGS_COLLECTION, bookingId), { status })
 }
 
-/**
- * Usuwa rezerwację.
- */
+
 export async function deleteBooking(bookingId: string): Promise<void> {
   if (!db) throw new Error("Firestore nie jest dostępny")
   await deleteDoc(doc(db, BOOKINGS_COLLECTION, bookingId))
 }
 
-/**
- * Pobiera wszystkie ulubione (dla panelu administratora).
- */
+
 export async function getAllFavorites(): Promise<FavoriteAdminRecord[]> {
   if (!db) return []
   const snapshot = await getDocs(collection(db, FAVORITES_COLLECTION))
@@ -166,17 +145,11 @@ export async function getAllFavorites(): Promise<FavoriteAdminRecord[]> {
   })
 }
 
-/**
- * Usuwa wpis ulubionych po identyfikatorze dokumentu.
- */
+
 export async function deleteFavoriteById(docId: string): Promise<void> {
   if (!db) throw new Error("Firestore nie jest dostępny")
   await deleteDoc(doc(db, FAVORITES_COLLECTION, docId))
 }
-
-// ============================================================
-// UŻYTKOWNICY (panel administratora)
-// ============================================================
 
 const USERS_COLLECTION = "users"
 
@@ -188,10 +161,7 @@ function asUserStatus(value: unknown): UserAccountStatus {
   return value === "blocked" ? "blocked" : "active"
 }
 
-/**
- * Pobiera profile z kolekcji `users` i scala je z UID
- * występującymi w rezerwacjach oraz ulubionych.
- */
+
 export async function getAllUsersAdmin(
   bookings: BookingData[],
   favorites: FavoriteAdminRecord[],
@@ -266,9 +236,7 @@ export async function getAllUsersAdmin(
   })
 }
 
-/**
- * Tworzy lub aktualizuje profil użytkownika w Firestore.
- */
+
 export async function saveUserProfile(
   uid: string,
   input: UserAdminEditInput,
@@ -292,9 +260,7 @@ export async function saveUserProfile(
   )
 }
 
-/**
- * Usuwa profil użytkownika z kolekcji `users` (nie usuwa konta Auth).
- */
+
 export async function deleteUserProfile(uid: string): Promise<void> {
   if (!db) throw new Error("Firestore nie jest dostępny")
   await deleteDoc(doc(db, USERS_COLLECTION, uid))

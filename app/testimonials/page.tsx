@@ -121,7 +121,6 @@ function TestimonialsContent() {
 
   return (
     <div className='relative flex flex-col h-full w-full overflow-hidden bg-background'>
-      {/* ========== NAGŁÓWEK ========== */}
       <header className='shrink-0 bg-card/80 backdrop-blur-sm border-b border-border/50 z-30'>
         <div className='flex items-center justify-between px-4 pt-4 pb-3'>
           <div className='flex items-center gap-3'>
@@ -145,9 +144,7 @@ function TestimonialsContent() {
         </div>
       </header>
 
-      {/* ========== GŁÓWNA TREŚĆ ========== */}
       <main className='flex-1 overflow-y-auto overscroll-y-contain'>
-        {/* --- HERO Z PODSUMOWANIEM --- */}
         <section className='px-5 pt-5 pb-2'>
           <motion.div
             custom={0}
@@ -203,7 +200,6 @@ function TestimonialsContent() {
           </motion.div>
         </section>
 
-        {/* --- ROZKŁAD OCEN --- */}
         <section className='px-5 py-3'>
           <motion.div
             custom={1}
@@ -240,7 +236,6 @@ function TestimonialsContent() {
           </motion.div>
         </section>
 
-        {/* --- FILTRY --- */}
         <section className='px-5 py-1'>
           <motion.div
             custom={2}
@@ -249,7 +244,6 @@ function TestimonialsContent() {
             animate='visible'
             className='flex flex-col gap-2.5'
           >
-            {/* Rating filter chips */}
             <div className='flex gap-1.5 overflow-x-auto scrollbar-none pb-0.5'>
               {ratingLabels.map((label) => (
                 <button
@@ -273,7 +267,6 @@ function TestimonialsContent() {
               ))}
             </div>
 
-            {/* Villa filter dropdown */}
             <div className='relative'>
               <button
                 onClick={() => setShowVillaPicker(!showVillaPicker)}
@@ -321,7 +314,6 @@ function TestimonialsContent() {
           </motion.div>
         </section>
 
-        {/* --- LISTA OPINII --- */}
         <section className='px-5 py-4'>
           <AnimatePresence mode='wait'>
             {filtered.length === 0 ? (
@@ -368,7 +360,6 @@ function TestimonialsContent() {
                     layout
                     className='bg-card border border-border/80 rounded-2xl p-4 shadow-sm hover:shadow-md hover:border-accent/30 transition-all'
                   >
-                    {/* Górny rząd: avatar + dane */}
                     <div className='flex items-start justify-between mb-3'>
                       <div className='flex items-center gap-3 min-w-0'>
                         <div className='w-10 h-10 rounded-full bg-linear-to-br from-accent/20 to-accent/10 flex items-center justify-center shrink-0 border border-border/50'>
@@ -406,7 +397,6 @@ function TestimonialsContent() {
                       <StarDisplay rating={item.rating} size='xs' />
                     </div>
 
-                    {/* Tekst opinii */}
                     <div className='relative mb-3'>
                       <Quote className='w-3.5 h-3.5 text-accent/30 absolute -top-0.5 -left-0.5' />
                       <p className='text-[11px] text-muted dark:text-muted-foreground/70 leading-relaxed pl-4'>
@@ -414,7 +404,6 @@ function TestimonialsContent() {
                       </p>
                     </div>
 
-                    {/* Dolny rząd: villa + grupa + like */}
                     <div className='flex items-center justify-between pt-2.5 border-t border-border/30'>
                       <div className='flex items-center gap-2'>
                         <Link
@@ -445,7 +434,6 @@ function TestimonialsContent() {
           </AnimatePresence>
         </section>
 
-        {/* --- CTA --- */}
         <section className='px-5 pb-4'>
           <motion.div
             custom={filtered.length + 3}
@@ -484,7 +472,6 @@ function TestimonialsContent() {
         <div className='h-20' />
       </main>
 
-      {/* ========== BOTTOM NAV ========== */}
       <BottomNav />
     </div>
   )

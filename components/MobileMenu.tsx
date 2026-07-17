@@ -24,7 +24,6 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const router = useRouter()
   const isAdmin = isAdminUser(user)
 
-  // Blokowanie przewijania strony pod menu, gdy jest otwarte
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden"
@@ -43,7 +42,6 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
     { name: "Kontakt", icon: Phone, href: "/contact" },
     { name: "Opinie", icon: MessageSquareText, href: "/testimonials" },
     { name: "Profil", icon: User, href: "/profile", protected: true },
-    // Link do panelu widoczny wyłącznie dla administratora
     ...(isAdmin
       ? [
           {
@@ -77,7 +75,6 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Tło przyciemniające (Overlay) */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -86,7 +83,6 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             className='absolute inset-0 bg-black/50 z-50 backdrop-blur-xs cursor-pointer'
           />
 
-          {/* Panel Menu wysuwany z lewej strony */}
           <motion.div
             initial={{ x: "-100%" }}
             animate={{ x: 0 }}
@@ -94,7 +90,6 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
             className='absolute top-0 bottom-0 left-0 w-4/5 max-w-75 bg-card text-card-foreground z-50 shadow-2xl flex flex-col p-6'
           >
-            {/* Header Menu */}
             <div className='flex items-center justify-between mb-6'>
               <span className='font-semibold text-lg tracking-wider text-primary '>
                 WILLE KOŁOBRZEG
@@ -108,7 +103,6 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               </button>
             </div>
 
-            {/* Sekcja użytkownika */}
             {initialized && (
               <div className='mb-5 px-4 py-3 rounded-2xl bg-black/3 dark:bg-white/5 border border-border/40'>
                 {user ? (
@@ -144,7 +138,6 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               </div>
             )}
 
-            {/* Elementy Menu */}
             <nav className='flex-1 space-y-2'>
               {menuItems.map((item, idx) => {
                 const Icon = item.icon
@@ -180,7 +173,6 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               })}
             </nav>
 
-            {/* Wylogowanie (tylko dla zalogowanych) */}
             {user && (
               <div className='pt-4 mb-3'>
                 <button
@@ -193,7 +185,6 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               </div>
             )}
 
-            {/* Stopka Menu */}
             <div className='pt-4 border-t border-border'>
               <p className='text-xs text-muted/60 dark:text-muted-foreground/50 text-center'>
                 © 2026 Ville Kołobrzeg. Wszelkie prawa zastrzeżone.

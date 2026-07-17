@@ -5,23 +5,18 @@ import { useTheme } from "./ThemeProvider"
 import { Sun, Moon } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 
-// Pomocnik do wykrywania montowania po stronie klienta bez kaskadowych renderowań
 function subscribe() {
   return () => {}
 }
 
 export default function ThemeToggle() {
   const { theme, toggleTheme } = useTheme()
-  // useSyncExternalStore zwraca wartość serwerową (false) podczas SSR
-  // i wartość kliencką (true) po montowaniu — bez dodatkowego cyklu renderowania
   const mounted = useSyncExternalStore(
     subscribe,
     () => true,
     () => false,
   )
 
-  // Dopóki nie nastąpi hydracja, renderujemy pusty placeholder (zgodny z SSR)
-  // aby uniknąć błędu hydracji (mismatch między serverem a klientem).
   if (!mounted) {
     return (
       <button

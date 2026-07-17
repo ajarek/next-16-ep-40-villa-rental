@@ -20,18 +20,10 @@ import { useAuth } from "@/lib/auth-context"
 import BottomNav from "@/components/BottomNav"
 import type { AuthMode } from "@/types/auth"
 
-// ============================================================
-// STAŁE
-// ============================================================
-
 const AUTH_MODES = {
   LOGIN: "login",
   REGISTER: "register",
 } as const
-
-// ============================================================
-// GŁÓWNY KOMPONENT
-// ============================================================
 
 function AuthContent() {
   const router = useRouter()
@@ -61,18 +53,15 @@ function AuthContent() {
 
   const emailRef = useRef<HTMLInputElement>(null)
 
-  // Przekieruj jeśli użytkownik jest już zalogowany
   useEffect(() => {
     if (initialized && user) {
       const redirect = searchParams.get("redirect") || "/"
-      // Zabezpieczenie przed open redirect – tylko względne ścieżki
       const safeRedirect =
         redirect.startsWith("/") && !redirect.startsWith("//") ? redirect : "/"
       router.push(safeRedirect)
     }
   }, [initialized, user, router, searchParams])
 
-  // Focus na email przy zmianie trybu
   useEffect(() => {
     setTimeout(() => emailRef.current?.focus(), 100)
   }, [mode])
@@ -85,7 +74,6 @@ function AuthContent() {
     setSuccessMsg("")
   }
 
-  // Walidacja
   const validate = (): string | null => {
     if (!email.trim()) return "Adres email jest wymagany"
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
@@ -99,7 +87,6 @@ function AuthContent() {
     return null
   }
 
-  // Submit formularza
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError("")
@@ -123,15 +110,12 @@ function AuthContent() {
     if (!result.success) {
       setError(result.error ?? "Wystąpił nieoczekiwany błąd")
     }
-    // Jeśli success – useEffect z przekierowaniem zadziała automatycznie
   }
 
-  // Logowanie przez Google
   const handleGoogleLogin = async () => {
     setError("")
     setSubmitting(true)
 
-    // Symulowane logowanie gdy Firebase nie jest skonfigurowany
     if (!process.env.NEXT_PUBLIC_FIREBASE_API_KEY) {
       await new Promise((r) => setTimeout(r, 1000))
       setSubmitting(false)
@@ -148,7 +132,6 @@ function AuthContent() {
     }
   }
 
-  // Reset hasła
   const handleResetPassword = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!resetEmail.trim()) return
@@ -165,7 +148,6 @@ function AuthContent() {
     }
   }
 
-  // Animacje
   const formVariants = {
     enter: { opacity: 0, x: 20 },
     center: { opacity: 1, x: 0 },
@@ -185,7 +167,6 @@ function AuthContent() {
 
   return (
     <div className='relative flex flex-col h-full w-full overflow-hidden bg-background'>
-      {/* ========== NAGŁÓWEK ========== */}
       <header className='shrink-0 flex items-center gap-3 px-4 pt-4 pb-3'>
         <button
           onClick={() => router.back()}
@@ -206,9 +187,7 @@ function AuthContent() {
         </div>
       </header>
 
-      {/* ========== GŁÓWNA TREŚĆ ========== */}
       <main className='flex-1 overflow-y-auto px-5'>
-        {/* Logo / Brand */}
         <div className='flex flex-col items-center pt-6 pb-8'>
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
@@ -238,7 +217,6 @@ function AuthContent() {
           </motion.p>
         </div>
 
-        {/* Formularz */}
         <AnimatePresence mode='wait'>
           <motion.form
             key={mode}
@@ -250,7 +228,6 @@ function AuthContent() {
             onSubmit={handleSubmit}
             className='flex flex-col gap-4'
           >
-            {/* Pole: Imię i nazwisko (tylko rejestracja) */}
             <AnimatePresence>
               {mode === AUTH_MODES.REGISTER && (
                 <motion.div
@@ -281,7 +258,6 @@ function AuthContent() {
               )}
             </AnimatePresence>
 
-            {/* Pole: Email */}
             <div>
               <label
                 htmlFor='email'
@@ -305,7 +281,6 @@ function AuthContent() {
               </div>
             </div>
 
-            {/* Pole: Hasło */}
             <div>
               <label
                 htmlFor='password'
@@ -346,7 +321,6 @@ function AuthContent() {
               </div>
             </div>
 
-            {/* Zapomniałem hasła (tylko login) */}
             {mode === AUTH_MODES.LOGIN && (
               <button
                 type='button'
@@ -360,7 +334,6 @@ function AuthContent() {
               </button>
             )}
 
-            {/* Zgoda na regulamin (tylko rejestracja) */}
             <AnimatePresence>
               {mode === AUTH_MODES.REGISTER && (
                 <motion.div
@@ -407,7 +380,6 @@ function AuthContent() {
               )}
             </AnimatePresence>
 
-            {/* Komunikat błędu */}
             <AnimatePresence>
               {error && (
                 <motion.div
@@ -424,7 +396,6 @@ function AuthContent() {
               )}
             </AnimatePresence>
 
-            {/* Komunikat sukcesu */}
             <AnimatePresence>
               {successMsg && (
                 <motion.div
@@ -441,7 +412,6 @@ function AuthContent() {
               )}
             </AnimatePresence>
 
-            {/* Przycisk submit */}
             <button
               type='submit'
               disabled={submitting}
@@ -458,7 +428,6 @@ function AuthContent() {
           </motion.form>
         </AnimatePresence>
 
-        {/* Separator */}
         <div className='flex items-center gap-3 my-6'>
           <div className='flex-1 h-px bg-border/60' />
           <span className='text-[10px] text-muted dark:text-muted-foreground/50 uppercase tracking-wider font-medium'>
@@ -467,7 +436,6 @@ function AuthContent() {
           <div className='flex-1 h-px bg-border/60' />
         </div>
 
-        {/* Social login */}
         <div className='flex gap-3'>
           <button
             type='button'
@@ -515,7 +483,6 @@ function AuthContent() {
           </button>
         </div>
 
-        {/* Przełącznik logowanie/rejestracja */}
         <div className='flex items-center justify-center gap-1.5 mt-8 mb-4'>
           <span className='text-[11px] text-muted dark:text-muted-foreground/70'>
             {mode === AUTH_MODES.LOGIN
@@ -532,10 +499,8 @@ function AuthContent() {
         </div>
       </main>
 
-      {/* ========== BOTTOM NAV ========== */}
       <BottomNav />
 
-      {/* ========== MODAL RESETU HASŁA ========== */}
       <AnimatePresence>
         {showResetModal && (
           <>
@@ -657,18 +622,13 @@ function AuthContent() {
   )
 }
 
-// ============================================================
-// STRONA AUTH
-// ============================================================
 export default function AuthPage() {
   return (
     <>
-      {/* === WIDOK MOBILNY (pełny ekran) === */}
       <div className='flex md:hidden h-screen w-full'>
         <AuthContent />
       </div>
 
-      {/* === WIDOK DESKTOPOWY (symulator telefonu) === */}
       <div className='hidden md:flex min-h-screen w-full items-center justify-center relative overflow-hidden bg-linear-to-br from-[#0a2540] via-[#1a3a5c] to-[#0a2540]'>
         <div className='absolute top-[-10%] left-[-5%] w-[500px] h-[500px] rounded-full bg-accent/10 blur-[120px] pointer-events-none' />
         <div className='absolute bottom-[-10%] right-[-5%] w-[400px] h-[400px] rounded-full bg-blue-500/10 blur-[100px] pointer-events-none' />

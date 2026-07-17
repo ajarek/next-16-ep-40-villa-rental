@@ -44,11 +44,7 @@ import {
   isFavorite as checkIsFavorite,
   addBooking,
 } from "@/lib/firestore-service"
-import type { Villa, Review } from "@/types/villa"
-
-// ============================================================
-// MAPOWANIE IKON UDOGODNIEŃ
-// ============================================================
+import type { Villa } from "@/types/villa"
 
 const amenityIcons: Record<string, React.ElementType> = {
   Basen: Waves,
@@ -62,10 +58,6 @@ const amenityIcons: Record<string, React.ElementType> = {
   "Zwierzęta akceptowane": Wind,
   Grill: Flame,
 }
-
-// ============================================================
-// GŁÓWNY KOMPONENT
-// ============================================================
 
 function VillaDetailContent() {
   const params = useParams()
@@ -83,7 +75,6 @@ function VillaDetailContent() {
   const [showBookingForm, setShowBookingForm] = useState(false)
   const [showConfirmation, setShowConfirmation] = useState(false)
 
-  // Fetch villa data
   useEffect(() => {
     fetch("/data/villas.json")
       .then((res) => res.json())
@@ -95,13 +86,11 @@ function VillaDetailContent() {
       .catch(() => setLoading(false))
   }, [params.id])
 
-  // Pobierz stan ulubionych z Firestore
   useEffect(() => {
     if (!user || !params.id || !villa) return
     checkIsFavorite(user.uid, params.id as string).then(setIsFavorite)
   }, [user, params.id, villa])
 
-  // Oblicz liczbę nocy i cenę całkowitą
   const nightsCount =
     checkIn && checkOut
       ? Math.ceil(
@@ -110,7 +99,6 @@ function VillaDetailContent() {
       : 0
   const totalPrice = villa ? nightsCount * villa.price : 0
 
-  // Generuj stabilny i deterministyczny numer rezerwacji
   const reservationNumber = useMemo(() => {
     const seed = `${params.id}-${checkIn?.getTime() || 0}-${checkOut?.getTime() || 0}`
     let hash = 0
@@ -121,7 +109,6 @@ function VillaDetailContent() {
     return `VK-${String(num).padStart(5, "0")}`
   }, [params.id, checkIn, checkOut])
 
-  // Przewijanie galerii
   const galleryLength = villa?.gallery?.length || 0
 
   const goToSlide = useCallback(
@@ -132,7 +119,6 @@ function VillaDetailContent() {
     [galleryLength],
   )
 
-  // Automatyczna karuzela
   useEffect(() => {
     if (galleryLength <= 1) return
     const timer = setInterval(() => {
@@ -176,7 +162,6 @@ function VillaDetailContent() {
 
   return (
     <div className='relative flex flex-col h-full w-full overflow-hidden bg-background'>
-      {/* ========== GÓRNY PASKI NAKŁADANE NA ZDJĘCIE ========== */}
       <div className='absolute top-0 left-0 right-0 z-30 flex items-center justify-between px-4 pt-4'>
         <button
           onClick={() => router.back()}
@@ -235,11 +220,8 @@ function VillaDetailContent() {
         </div>
       </div>
 
-      {/* ========== GŁÓWNA TREŚĆ (PRZEWIJANA) ========== */}
       <main className='flex-1 overflow-y-auto overscroll-y-contain'>
-        {/* ========== GALERIA ZDJĘĆ ========== */}
         <section className='relative w-full h-[320px] overflow-hidden'>
-          {/* Główne zdjęcie z karuzelą */}
           <AnimatePresence mode='wait'>
             <motion.div
               key={currentSlide}
@@ -257,12 +239,10 @@ function VillaDetailContent() {
                 priority
                 sizes='(max-width: 480px) 100vw, 480px'
               />
-              {/* Gradient overlay */}
               <div className='absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-black/20' />
             </motion.div>
           </AnimatePresence>
 
-          {/* Status badge */}
           <div className='absolute top-16 left-4 z-20'>
             <span
               className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider backdrop-blur-md ${
@@ -280,7 +260,6 @@ function VillaDetailContent() {
             </span>
           </div>
 
-          {/* Przyciski nawigacji galerii */}
           {galleryLength > 1 && (
             <>
               <button
@@ -300,14 +279,12 @@ function VillaDetailContent() {
             </>
           )}
 
-          {/* Licznik zdjęć */}
           <div className='absolute bottom-4 right-4 z-20 bg-black/40 backdrop-blur-md px-2.5 py-1 rounded-lg'>
             <span className='text-white text-[11px] font-medium'>
               {currentSlide + 1}/{galleryLength}
             </span>
           </div>
 
-          {/* Kropki galerii */}
           {galleryLength > 1 && (
             <div className='absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5'>
               {villa.gallery.map((_, i) => (
@@ -326,9 +303,7 @@ function VillaDetailContent() {
           )}
         </section>
 
-        {/* ========== SEKCJA INFORMACYJNA ========== */}
         <section className='px-5 pt-5 pb-3 border-b border-border/30'>
-          {/* Nazwa i lokalizacja */}
           <div className='flex items-start justify-between'>
             <div className='flex-1 min-w-0'>
               <h1 className='text-xl font-extrabold text-foreground tracking-tight'>
@@ -342,7 +317,6 @@ function VillaDetailContent() {
                 </span>
               </div>
             </div>
-            {/* Cena w badge */}
             <div className='flex flex-col items-end shrink-0 ml-3'>
               <span className='text-lg font-extrabold text-foreground'>
                 {villa.price} zł
@@ -353,7 +327,6 @@ function VillaDetailContent() {
             </div>
           </div>
 
-          {/* Ocena */}
           <div className='flex items-center gap-1.5 mt-3'>
             <div className='flex items-center gap-1 px-2 py-1 bg-yellow-400/10 rounded-lg'>
               <Star className='w-3.5 h-3.5 fill-yellow-400 text-yellow-400' />
@@ -372,7 +345,6 @@ function VillaDetailContent() {
           </div>
         </section>
 
-        {/* ========== QUICK INFO ========== */}
         <section className='px-5 py-4 border-b border-border/30'>
           <div className='grid grid-cols-4 gap-2'>
             {[
@@ -413,7 +385,6 @@ function VillaDetailContent() {
           </div>
         </section>
 
-        {/* ========== OPIS ========== */}
         <section className='px-5 py-5 border-b border-border/30'>
           <h2 className='text-sm font-bold text-foreground mb-3'>
             O tym obiekcie
@@ -421,7 +392,6 @@ function VillaDetailContent() {
           <p className='text-xs  leading-relaxed'>{villa.description}</p>
         </section>
 
-        {/* =========️ UDOGODNIENIA ========== */}
         <section className='px-5 py-5 border-b border-border/30'>
           <h2 className='text-sm font-bold text-foreground mb-3'>
             Udogodnienia
@@ -446,7 +416,6 @@ function VillaDetailContent() {
           </div>
         </section>
 
-        {/* ========== MAPA ========== */}
         <section className='px-5 py-5 border-b border-border/30'>
           <div className='flex items-center justify-between mb-3'>
             <h2 className='text-sm font-bold text-foreground'>Lokalizacja</h2>
@@ -464,9 +433,7 @@ function VillaDetailContent() {
             </button>
           </div>
 
-          {/* Stylizowana mapa */}
           <div className='relative w-full h-[180px] rounded-2xl overflow-hidden bg-linear-to-br from-primary/10 to-transparent border border-border/60'>
-            {/* Siatka mapy */}
             <div
               className='absolute inset-0 opacity-10 pointer-events-none'
               style={{
@@ -484,7 +451,6 @@ function VillaDetailContent() {
     `,
               }}
             />
-            {/* Znacznik lokalizacji */}
             <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center'>
               <div className='w-10 h-10 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/30 animate-bounce'>
                 <MapPin className='w-5 h-5 text-primary-foreground' />
@@ -494,7 +460,6 @@ function VillaDetailContent() {
               </span>
             </div>
 
-            {/* Etykiety miejsc */}
             <div className='absolute bottom-3 left-3 flex flex-col gap-0.5'>
               <span className='text-[9px] text-muted dark:text-muted-foreground/60'>
                 Plaża · {villa.distanceToBeach} m
@@ -504,7 +469,6 @@ function VillaDetailContent() {
               </span>
             </div>
 
-            {/* Przycisk nawigacji */}
             <div className='absolute bottom-3 right-3'>
               <button
                 onClick={() =>
@@ -522,7 +486,6 @@ function VillaDetailContent() {
           </div>
         </section>
 
-        {/* ========== ZASADY DOMU ========== */}
         <section className='px-5 py-5 border-b border-border/30'>
           <h2 className='text-sm font-bold text-foreground mb-3'>
             Zasady domu
@@ -601,7 +564,6 @@ function VillaDetailContent() {
           </div>
         </section>
 
-        {/* ========== OPINIE ========== */}
         <section className='px-5 py-5 border-b border-border/30'>
           <div className='flex items-center justify-between mb-4'>
             <h2 className='text-sm font-bold text-foreground'>Opinie gości</h2>
@@ -621,7 +583,6 @@ function VillaDetailContent() {
               >
                 <div className='flex items-center justify-between mb-2'>
                   <div className='flex items-center gap-2.5'>
-                    {/* Avatar z inicjałem */}
                     <div className='w-8 h-8 rounded-full bg-foreground/10 flex items-center justify-center'>
                       <span className='text-xs font-bold text-foreground/60'>
                         {review.author.charAt(0)}
@@ -655,7 +616,6 @@ function VillaDetailContent() {
           </div>
         </section>
 
-        {/* ========== KONTAKT ========== */}
         <section className='px-5 py-5'>
           <h2 className='text-sm font-bold text-foreground mb-3'>
             Masz pytania?
@@ -680,11 +640,9 @@ function VillaDetailContent() {
           </div>
         </section>
 
-        {/* Dodatkowy padding na dole dla BottomNav */}
         <div className='h-20' />
       </main>
 
-      {/* ========== DOLNY PASKI REZERWACJI (FIXED) ========== */}
       <div className='shrink-0 bg-card/90 backdrop-blur-md border-t border-border/60 px-4 py-3 z-30'>
         <div className='flex items-center justify-between mb-3'>
           <div>
@@ -704,7 +662,6 @@ function VillaDetailContent() {
           </div>
         </div>
 
-        {/* Booking bar */}
         <div className='flex items-center gap-2'>
           <div className='flex-1 flex items-center gap-1 px-3 py-2.5 rounded-xl bg-black/5 dark:bg-white/5 border border-border/60'>
             <Calendar className='w-4 h-4 text-foreground/50 shrink-0' />
@@ -730,14 +687,11 @@ function VillaDetailContent() {
         </div>
       </div>
 
-      {/* ========== BOTTOM NAV ========== */}
       <BottomNav />
 
-      {/* ========== PANEL REZERWACJI (SLIDE-UP) ========== */}
       <AnimatePresence>
         {showBookingForm && (
           <>
-            {/* Overlay */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -746,7 +700,6 @@ function VillaDetailContent() {
               className='absolute inset-0 bg-black/40 z-50'
             />
 
-            {/* Panel */}
             <motion.div
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
@@ -754,7 +707,6 @@ function VillaDetailContent() {
               transition={{ type: "spring", damping: 28, stiffness: 300 }}
               className='absolute bottom-0 left-0 right-0 z-50 bg-card rounded-t-3xl shadow-2xl max-h-[85vh] flex flex-col'
             >
-              {/* Header */}
               <div className='flex items-center justify-between px-5 pt-5 pb-3 border-b border-border/50'>
                 <div>
                   <h2 className='text-base font-bold text-foreground'>
@@ -772,9 +724,7 @@ function VillaDetailContent() {
                 </button>
               </div>
 
-              {/* Treść */}
               <div className='flex-1 overflow-y-auto px-5 py-4 space-y-5'>
-                {/* Daty */}
                 <div>
                   <h3 className='text-xs font-bold text-foreground uppercase tracking-wider mb-2.5'>
                     Daty pobytu
@@ -798,7 +748,6 @@ function VillaDetailContent() {
                   </div>
                 </div>
 
-                {/* Goście */}
                 <div>
                   <h3 className='text-xs font-bold text-foreground uppercase tracking-wider mb-2.5'>
                     Liczba gości
@@ -836,7 +785,6 @@ function VillaDetailContent() {
                   )}
                 </div>
 
-                {/* Podsumowanie kosztów */}
                 {checkIn && checkOut && nightsCount > 0 && (
                   <div>
                     <h3 className='text-xs font-bold text-foreground uppercase tracking-wider mb-2.5'>
@@ -881,13 +829,11 @@ function VillaDetailContent() {
                 )}
               </div>
 
-              {/* Przycisk rezerwacji */}
               <div className='px-5 py-4 border-t border-border/50'>
                 <button
                   onClick={async () => {
                     if (!user || !villa || !checkIn || !checkOut) return
 
-                    // Zapisz dane rezerwacji w sessionStorage i przejdź do płatności
                     const bookingData = {
                       villaId: villa.id,
                       villaName: villa.name,
@@ -907,7 +853,6 @@ function VillaDetailContent() {
                       )
                     }
 
-                    // Zapisz rezerwację w Firestore
                     try {
                       await addBooking(user.uid, {
                         villaId: villa.id,
@@ -920,9 +865,7 @@ function VillaDetailContent() {
                         totalPrice: totalPrice + 200,
                         status: "pending",
                       })
-                    } catch {
-                      // Jeśli Firestore nie działa – rezerwacja mimo to się pokaże
-                    }
+                    } catch {}
 
                     setShowBookingForm(false)
                     router.push(
@@ -951,11 +894,9 @@ function VillaDetailContent() {
         )}
       </AnimatePresence>
 
-      {/* ========== POTWIERDZENIE REZERWACJI (OVERLAY) ========== */}
       <AnimatePresence>
         {showConfirmation && (
           <>
-            {/* Overlay */}
             <motion.div
               role='dialog'
               aria-modal='true'
@@ -966,7 +907,6 @@ function VillaDetailContent() {
               transition={{ duration: 0.3 }}
               className='absolute inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-6'
             >
-              {/* Karta potwierdzenia */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.8, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -979,9 +919,7 @@ function VillaDetailContent() {
                 }}
                 className='w-full max-w-sm bg-card rounded-3xl shadow-2xl overflow-hidden'
               >
-                {/* Górna sekcja z animacją */}
                 <div className='pt-10 pb-8 flex flex-col items-center bg-linear-to-b from-emerald-500/10 to-transparent'>
-                  {/* Animowany okrąg z checkmarkiem */}
                   <motion.div
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
@@ -1002,7 +940,6 @@ function VillaDetailContent() {
                     </motion.div>
                   </motion.div>
 
-                  {/* Tekst potwierdzenia */}
                   <motion.h2
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -1021,7 +958,6 @@ function VillaDetailContent() {
                   </motion.p>
                 </div>
 
-                {/* Szczegóły rezerwacji */}
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -1073,7 +1009,6 @@ function VillaDetailContent() {
                   </div>
                 </motion.div>
 
-                {/* Numer rezerwacji */}
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -1087,7 +1022,6 @@ function VillaDetailContent() {
                   <div className='w-1 h-1 rounded-full bg-foreground/20' />
                 </motion.div>
 
-                {/* Przycisk zamknięcia */}
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -1117,26 +1051,18 @@ function VillaDetailContent() {
     </div>
   )
 }
-
-// ============================================================
-// GŁÓWNA STRONA SZCZEGÓŁÓW WILLI
-// ============================================================
 export default function VillaDetailPage() {
   return (
     <>
-      {/* === WIDOK MOBILNY (pełny ekran) === */}
       <div className='flex md:hidden h-screen w-full'>
         <VillaDetailContent />
       </div>
 
-      {/* === WIDOK DESKTOPOWY (symulator telefonu) === */}
       <div className='hidden md:flex min-h-screen w-full items-center justify-center relative overflow-hidden bg-linear-to-br from-[#0a2540] via-[#1a3a5c] to-[#0a2540]'>
-        {/* Ozdobne elementy tła */}
         <div className='absolute top-[-10%] left-[-5%] w-[500px] h-[500px] rounded-full bg-accent/10 blur-[120px] pointer-events-none' />
         <div className='absolute bottom-[-10%] right-[-5%] w-[400px] h-[400px] rounded-full bg-blue-500/10 blur-[100px] pointer-events-none' />
         <div className='absolute top-[30%] right-[15%] w-[300px] h-[300px] rounded-full bg-accent/5 blur-[80px] pointer-events-none' />
 
-        {/* Etykieta aplikacji nad telefonem */}
         <div className='absolute top-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1'>
           <span className='text-white/40 text-xs tracking-[0.3em] uppercase font-medium'>
             Ville Kołobrzeg
@@ -1146,7 +1072,6 @@ export default function VillaDetailPage() {
           </span>
         </div>
 
-        {/* Ramka telefonu */}
         <div
           className='relative'
           style={{
@@ -1154,7 +1079,6 @@ export default function VillaDetailPage() {
             height: "844px",
           }}
         >
-          {/* Zewnętrzna ramka urządzenia */}
           <div
             className='absolute inset-0 rounded-[55px] shadow-[0_60px_120px_rgba(0,0,0,0.6),0_0_0_1px_rgba(255,255,255,0.08)] overflow-hidden'
             style={{
@@ -1162,14 +1086,12 @@ export default function VillaDetailPage() {
                 "linear-gradient(145deg, #2a2a2a 0%, #1a1a1a 30%, #0d0d0d 60%, #1a1a1a 100%)",
             }}
           >
-            {/* Wewnętrzne wcięcie ramki (bezel) */}
             <div
               className='absolute rounded-[48px] overflow-hidden bg-background'
               style={{
                 inset: "8px",
               }}
             >
-              {/* Notch – górna belka telefonu */}
               <div
                 className='absolute top-0 left-1/2 -translate-x-1/2 z-50 flex items-center justify-center'
                 style={{ width: "130px", height: "34px" }}
@@ -1183,13 +1105,11 @@ export default function VillaDetailPage() {
                 </div>
               </div>
 
-              {/* Treść aplikacji */}
               <div className='absolute inset-0 pt-[34px]'>
                 <VillaDetailContent />
               </div>
             </div>
 
-            {/* Przyciski ramki */}
             <div
               className='absolute rounded-r-sm bg-zinc-700'
               style={{
@@ -1228,7 +1148,6 @@ export default function VillaDetailPage() {
             />
           </div>
 
-          {/* Odbłysk szkła */}
           <div
             className='absolute pointer-events-none rounded-[48px] opacity-20'
             style={{
@@ -1239,7 +1158,6 @@ export default function VillaDetailPage() {
           />
         </div>
 
-        {/* Stopka */}
         <div className='absolute bottom-6 left-1/2 -translate-x-1/2'>
           <span className='text-white/20 text-[10px] tracking-widest uppercase'>
             © 2026 Ville Kołobrzeg

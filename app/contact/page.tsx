@@ -151,7 +151,6 @@ function ContactContent() {
 
   return (
     <div className='relative flex flex-col h-full w-full overflow-hidden bg-background'>
-      {/* ========== NAGŁÓWEK ========== */}
       <header className='shrink-0 bg-card/80 backdrop-blur-sm border-b border-border/50 z-30'>
         <div className='flex items-center justify-between px-4 pt-4 pb-3'>
           <div className='flex items-center gap-3'>
@@ -175,9 +174,7 @@ function ContactContent() {
         </div>
       </header>
 
-      {/* ========== GŁÓWNA TREŚĆ ========== */}
       <main className='flex-1 overflow-y-auto overscroll-y-contain'>
-        {/* --- HERO Z KARTAMI KONTAKTOWYMI --- */}
         <section className='px-5 pt-5 pb-2'>
           <motion.div
             custom={0}
@@ -209,7 +206,6 @@ function ContactContent() {
           </motion.div>
         </section>
 
-        {/* --- SZYBKI KONTAKT --- */}
         <section className='px-5 py-3'>
           <div className='grid grid-cols-2 gap-2.5'>
             {quickContacts.map((item, i) => {
@@ -252,7 +248,6 @@ function ContactContent() {
           </div>
         </section>
 
-        {/* --- SOCIAL MEDIA --- */}
         <section className='px-5 py-1'>
           <motion.div
             custom={5}
@@ -281,7 +276,6 @@ function ContactContent() {
           </motion.div>
         </section>
 
-        {/* --- FORMULARZ KONTAKTOWY --- */}
         <section className='px-5 py-3'>
           <motion.div
             custom={6}
@@ -467,7 +461,6 @@ function ContactContent() {
           </motion.div>
         </section>
 
-        {/* --- POMOC AWARYJNA (24/7) --- */}
         <section className='px-5 py-1'>
           <motion.div
             custom={7}
@@ -503,7 +496,6 @@ function ContactContent() {
           </motion.div>
         </section>
 
-        {/* --- FAQ --- */}
         <section className='px-5 py-4'>
           <motion.div
             custom={8}
@@ -521,7 +513,6 @@ function ContactContent() {
               </span>
             </div>
 
-            {/* Filtry kategorii FAQ */}
             <div className='flex gap-1.5 overflow-x-auto scrollbar-none pb-0.5'>
               {faqCategories.map((cat) => (
                 <button
@@ -541,7 +532,6 @@ function ContactContent() {
               ))}
             </div>
 
-            {/* Lista FAQ */}
             <div className='space-y-2'>
               {filteredFaq.map((item, i) => {
                 const isOpen = openFaq === i
@@ -601,7 +591,6 @@ function ContactContent() {
           </motion.div>
         </section>
 
-        {/* --- MAPA / LOKALIZACJA BIURA --- */}
         <section className='px-5 py-1 mb-4'>
           <motion.div
             custom={9}
@@ -635,7 +624,6 @@ function ContactContent() {
               </a>
             </div>
 
-            {/* Stylizowana mapa */}
             <div className='relative w-full h-[160px] rounded-2xl overflow-hidden bg-linear-to-br from-violet-500/10 to-transparent border border-border/60'>
               <div
                 className='absolute inset-0 opacity-10 pointer-events-none'
@@ -647,7 +635,6 @@ function ContactContent() {
                   `,
                 }}
               />
-              {/* Znacznik biura */}
               <div className='absolute top-[40%] left-[60%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center'>
                 <div className='w-10 h-10 rounded-full bg-violet-500 flex items-center justify-center shadow-lg shadow-violet-500/30'>
                   <Building2 className='w-5 h-5 text-white' />
@@ -656,7 +643,6 @@ function ContactContent() {
                   Ville Kołobrzeg
                 </span>
               </div>
-              {/* Etykiety miejsc */}
               <div className='absolute bottom-3 left-3 space-y-0.5'>
                 <span className='text-[9px] text-muted dark:text-muted-foreground/60 block'>
                   Plaża · 200 m
@@ -665,7 +651,6 @@ function ContactContent() {
                   Molo · 500 m
                 </span>
               </div>
-              {/* Przycisk nawigacji */}
               <div className='absolute bottom-3 right-3'>
                 <a
                   href='https://maps.google.com/dir/?api=1&destination=Kołobrzeg+ul+Morska+15'
@@ -679,7 +664,6 @@ function ContactContent() {
               </div>
             </div>
 
-            {/* Godziny otwarcia */}
             <div className='mt-3 flex items-center gap-3 px-3 py-2.5 rounded-xl bg-black/3 dark:bg-white/5'>
               <Clock className='w-4 h-4 text-muted dark:text-muted-foreground/50 shrink-0' />
               <div className='flex-1 min-w-0'>
@@ -692,7 +676,6 @@ function ContactContent() {
           </motion.div>
         </section>
 
-        {/* Przycisk do płatności */}
         <section className='px-5 pb-4'>
           <motion.div
             custom={10}
@@ -716,11 +699,9 @@ function ContactContent() {
           </motion.div>
         </section>
 
-        {/* Dodatkowy padding dla BottomNav */}
         <div className='h-20' />
       </main>
 
-      {/* ========== BOTTOM NAV ========== */}
       <BottomNav />
     </div>
   )

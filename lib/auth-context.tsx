@@ -21,15 +21,7 @@ import {
 import { auth } from "./firebase"
 import type { AuthState, AuthContextType } from "@/types/auth"
 
-// ============================================================
-// KONTEKST
-// ============================================================
-
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
-
-// ============================================================
-// PROVIDER
-// ============================================================
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState<AuthState>({
@@ -38,7 +30,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     initialized: false,
   })
 
-  // Obserwuj zmiany stanu autoryzacji
   useEffect(() => {
     if (!auth) {
       const timer = setTimeout(() => {
@@ -60,7 +51,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return unsubscribe
   }, [])
 
-  // Logowanie email/hasło
   const login = useCallback(async (email: string, password: string) => {
     if (!auth)
       return { success: false, error: "Firebase nie jest skonfigurowany" }
@@ -84,7 +74,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, [])
 
-  // Rejestracja email/hasło
   const register = useCallback(
     async (email: string, password: string, name: string) => {
       if (!auth)
@@ -112,13 +101,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     [],
   )
 
-  // Wylogowanie
   const logout = useCallback(async () => {
     if (!auth) return
     await signOut(auth)
   }, [])
 
-  // Reset hasła
   const resetPassword = useCallback(async (email: string) => {
     if (!auth)
       return { success: false, error: "Firebase nie jest skonfigurowany" }
@@ -137,7 +124,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, [])
 
-  // Logowanie przez Google
   const loginWithGoogle = useCallback(async () => {
     if (!auth)
       return { success: false, error: "Firebase nie jest skonfigurowany" }
@@ -170,10 +156,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     </AuthContext.Provider>
   )
 }
-
-// ============================================================
-// HOOK
-// ============================================================
 
 export function useAuth(): AuthContextType {
   const ctx = useContext(AuthContext)

@@ -84,7 +84,6 @@ function VillasCatalogContent() {
     () => searchParams?.get("status") || "",
   )
 
-  // Dostosowanie stanu podczas renderowania (adjust state during render) w przypadku zmiany parametrów wyszukiwania
   const [prevParams, setPrevParams] = useState(searchParams)
   if (searchParams !== prevParams) {
     setPrevParams(searchParams)
@@ -139,44 +138,36 @@ function VillasCatalogContent() {
     (filters.priceMin > 0 || filters.priceMax < 2000 ? 1 : 0) +
     (statusFilter ? 1 : 0)
 
-  // Filtrowanie i sortowanie
   const filteredVillas = useMemo(() => {
     let result = [...villas]
 
-    // Wyszukiwanie po nazwie
     if (searchQuery) {
       const q = searchQuery.toLowerCase()
       result = result.filter((v) => v.name.toLowerCase().includes(q))
     }
 
-    // Filtr lokalizacji
     if (filters.location) {
       result = result.filter((v) => v.location === filters.location)
     }
 
-    // Filtr ceny
     result = result.filter(
       (v) => v.price >= filters.priceMin && v.price <= filters.priceMax,
     )
 
-    // Filtr udogodnień
     if (filters.amenities.length > 0) {
       result = result.filter((v) =>
         filters.amenities.every((a) => v.amenities.includes(a)),
       )
     }
 
-    // Filtr liczby gości
     if (minGuests > 0) {
       result = result.filter((v) => v.numberOfPeople >= minGuests)
     }
 
-    // Filtr statusu (free / busy)
     if (statusFilter) {
       result = result.filter((v) => v.status === statusFilter)
     }
 
-    // Sortowanie
     switch (sortBy) {
       case "cena-rosnąco":
         result.sort((a, b) => a.price - b.price)
@@ -191,7 +182,6 @@ function VillasCatalogContent() {
         result.sort((a, b) => a.distanceToBeach - b.distanceToBeach)
         break
       default:
-        // popularne - domyślnie po ocenie i liczbie opinii
         result.sort(
           (a, b) => b.rating * b.reviewsCount - a.rating * a.reviewsCount,
         )
@@ -202,7 +192,6 @@ function VillasCatalogContent() {
 
   return (
     <div className='relative flex flex-col h-full w-full overflow-hidden bg-background'>
-      {/* ========== NAGŁÓWEK ========== */}
       <header className='shrink-0 bg-card/80 backdrop-blur-sm border-b border-border/50 z-30'>
         <div className='flex items-center justify-between px-4 pt-4 pb-3'>
           <div className='flex items-center gap-3'>
@@ -231,7 +220,6 @@ function VillasCatalogContent() {
           </button>
         </div>
 
-        {/* Pasek wyszukiwania */}
         <div className='px-4 pb-3'>
           <div className='relative'>
             <Search className='absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted dark:text-muted-foreground/70' />
@@ -254,9 +242,7 @@ function VillasCatalogContent() {
         </div>
       </header>
 
-      {/* ========== GŁÓWNA TREŚĆ ========== */}
       <main className='flex-1 overflow-y-auto overscroll-y-contain'>
-        {/* Aktywne filtry - chipsy */}
         {activeFilterCount > 0 && (
           <div className='flex items-center gap-2 px-4 py-3 overflow-x-auto scrollbar-none border-b border-border/30'>
             {filters.location && (
@@ -318,7 +304,6 @@ function VillasCatalogContent() {
           </div>
         )}
 
-        {/* Sortowanie i liczba wyników */}
         <div className='flex items-center justify-between px-4 py-3'>
           <span className='text-xs text-muted dark:text-muted-foreground/70'>
             {filteredVillas.length}{" "}
@@ -381,7 +366,6 @@ function VillasCatalogContent() {
           </div>
         </div>
 
-        {/* Siatka willi */}
         <div className='px-4 pb-24'>
           {filteredVillas.length === 0 ? (
             <div className='flex flex-col items-center justify-center py-16 gap-3'>
@@ -417,7 +401,6 @@ function VillasCatalogContent() {
                       href={`/villas/${villa.id}`}
                       className='block bg-card text-card-foreground rounded-2xl border border-border/80 shadow-sm overflow-hidden group hover:shadow-md hover:border-accent/40 transition-all duration-200'
                     >
-                      {/* Zdjęcie */}
                       <div className='relative h-[120px] w-full overflow-hidden'>
                         <Image
                           src={villa.image}
@@ -440,7 +423,6 @@ function VillasCatalogContent() {
                           />
                         </button>
 
-                        {/* Cena na zdjęciu */}
                         <div className='absolute bottom-2 left-2 bg-black/60 backdrop-blur-xs px-2 py-0.5 rounded-lg'>
                           <span className='text-white text-xs font-bold'>
                             {villa.price} zł
@@ -449,7 +431,6 @@ function VillasCatalogContent() {
                         </div>
                       </div>
 
-                      {/* Info */}
                       <div className='p-3 flex flex-col gap-1.5'>
                         <h3 className='font-bold text-xs text-foreground truncate leading-tight'>
                           {villa.name}
@@ -460,7 +441,6 @@ function VillasCatalogContent() {
                           <span>{villa.distanceToBeach}m od plaży</span>
                         </div>
 
-                        {/* Udogodnienia */}
                         <div className='flex flex-wrap gap-1'>
                           {villa.amenities.slice(0, 3).map((amenity) => {
                             const Icon = amenityIcons[amenity] || Sun
@@ -481,7 +461,6 @@ function VillasCatalogContent() {
                           )}
                         </div>
 
-                        {/* Ocena */}
                         <div className='flex items-center gap-1 mt-0.5'>
                           <Star className='w-3 h-3 fill-yellow-400 text-yellow-400' />
                           <span className='text-[10px] font-bold text-foreground'>
@@ -501,11 +480,9 @@ function VillasCatalogContent() {
         </div>
       </main>
 
-      {/* ========== PANEL FILTRÓW ========== */}
       <AnimatePresence>
         {showFilters && (
           <>
-            {/* Overlay */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -514,7 +491,6 @@ function VillasCatalogContent() {
               className='absolute inset-0 bg-black/40 z-50'
             />
 
-            {/* Panel */}
             <motion.div
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
@@ -522,7 +498,6 @@ function VillasCatalogContent() {
               transition={{ type: "spring", damping: 28, stiffness: 300 }}
               className='absolute bottom-0 left-0 right-0 z-50 bg-card rounded-t-3xl shadow-2xl max-h-[80vh] flex flex-col'
             >
-              {/* Header panelu */}
               <div className='flex items-center justify-between px-5 pt-5 pb-3 border-b border-border/50'>
                 <h2 className='text-base font-bold text-foreground'>Filtry</h2>
                 <button
@@ -533,9 +508,7 @@ function VillasCatalogContent() {
                 </button>
               </div>
 
-              {/* Treść filtrów */}
               <div className='flex-1 overflow-y-auto px-5 py-4 space-y-5'>
-                {/* Lokalizacja */}
                 <div>
                   <h3 className='text-xs font-bold text-foreground uppercase tracking-wider mb-2.5'>
                     Lokalizacja
@@ -562,7 +535,6 @@ function VillasCatalogContent() {
                   </div>
                 </div>
 
-                {/* Zakres ceny */}
                 <div>
                   <h3 className='text-xs font-bold text-foreground uppercase tracking-wider mb-2.5'>
                     Cena za noc
@@ -610,7 +582,6 @@ function VillasCatalogContent() {
                       />
                     </div>
                   </div>
-                  {/* Zakres na sliderze */}
                   <div className='mt-3 px-1'>
                     <input
                       type='range'
@@ -633,7 +604,6 @@ function VillasCatalogContent() {
                   </div>
                 </div>
 
-                {/* Status */}
                 <div>
                   <h3 className='text-xs font-bold text-foreground uppercase tracking-wider mb-2.5'>
                     Status
@@ -670,7 +640,6 @@ function VillasCatalogContent() {
                   </div>
                 </div>
 
-                {/* Udogodnienia */}
                 <div>
                   <h3 className='text-xs font-bold text-foreground uppercase tracking-wider mb-2.5'>
                     Udogodnienia
@@ -704,7 +673,6 @@ function VillasCatalogContent() {
                 </div>
               </div>
 
-              {/* Przyciski akcji */}
               <div className='px-5 py-4 border-t border-border/50 flex items-center gap-3'>
                 <button
                   onClick={() => {
@@ -727,31 +695,23 @@ function VillasCatalogContent() {
         )}
       </AnimatePresence>
 
-      {/* ========== DOLNA NAWIGACJA ========== */}
       <BottomNav />
     </div>
   )
 }
 
-// ============================================================
-// Główna strona katalogu – otacza zawartość ramką telefonu na desktopie
-// ============================================================
 export default function VillasCatalogPage() {
   return (
     <>
-      {/* === WIDOK MOBILNY (pełny ekran) === */}
       <div className='flex md:hidden h-screen w-full'>
         <VillasCatalogContent />
       </div>
 
-      {/* === WIDOK DESKTOPOWY (symulator telefonu) === */}
       <div className='hidden md:flex min-h-screen w-full items-center justify-center relative overflow-hidden bg-linear-to-br from-[#0a2540] via-[#1a3a5c] to-[#0a2540]'>
-        {/* Ozdobne elementy tła */}
         <div className='absolute top-[-10%] left-[-5%] w-[500px] h-[500px] rounded-full bg-accent/10 blur-[120px] pointer-events-none' />
         <div className='absolute bottom-[-10%] right-[-5%] w-[400px] h-[400px] rounded-full bg-blue-500/10 blur-[100px] pointer-events-none' />
         <div className='absolute top-[30%] right-[15%] w-[300px] h-[300px] rounded-full bg-accent/5 blur-[80px] pointer-events-none' />
 
-        {/* Etykieta aplikacji nad telefonem */}
         <div className='absolute top-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1'>
           <span className='text-white/40 text-xs tracking-[0.3em] uppercase font-medium'>
             Ville Kołobrzeg
@@ -761,7 +721,6 @@ export default function VillasCatalogPage() {
           </span>
         </div>
 
-        {/* Ramka telefonu */}
         <div
           className='relative'
           style={{
@@ -769,7 +728,6 @@ export default function VillasCatalogPage() {
             height: "844px",
           }}
         >
-          {/* Zewnętrzna ramka urządzenia */}
           <div
             className='absolute inset-0 rounded-[55px] shadow-[0_60px_120px_rgba(0,0,0,0.6),0_0_0_1px_rgba(255,255,255,0.08)] overflow-hidden'
             style={{
@@ -777,14 +735,12 @@ export default function VillasCatalogPage() {
                 "linear-gradient(145deg, #2a2a2a 0%, #1a1a1a 30%, #0d0d0d 60%, #1a1a1a 100%)",
             }}
           >
-            {/* Wewnętrzne wcięcie ramki (bezel) */}
             <div
               className='absolute rounded-[48px] overflow-hidden bg-background'
               style={{
                 inset: "8px",
               }}
             >
-              {/* Notch – górna belka telefonu z aparatem i głośnikiem */}
               <div
                 className='absolute top-0 left-1/2 -translate-x-1/2 z-50 flex items-center justify-center'
                 style={{ width: "130px", height: "34px" }}
@@ -798,13 +754,11 @@ export default function VillasCatalogPage() {
                 </div>
               </div>
 
-              {/* Treść aplikacji */}
               <div className='absolute inset-0 pt-[34px]'>
                 <VillasCatalogContent />
               </div>
             </div>
 
-            {/* Lewy przycisk zasilania */}
             <div
               className='absolute rounded-r-sm bg-zinc-700'
               style={{
@@ -814,7 +768,6 @@ export default function VillasCatalogPage() {
                 height: "60px",
               }}
             />
-            {/* Prawa głośność góra */}
             <div
               className='absolute rounded-l-sm bg-zinc-700'
               style={{
@@ -824,7 +777,6 @@ export default function VillasCatalogPage() {
                 height: "40px",
               }}
             />
-            {/* Prawa głośność dół */}
             <div
               className='absolute rounded-l-sm bg-zinc-700'
               style={{
@@ -834,7 +786,6 @@ export default function VillasCatalogPage() {
                 height: "40px",
               }}
             />
-            {/* Przycisk wyciszenia */}
             <div
               className='absolute rounded-l-sm bg-zinc-700'
               style={{
@@ -846,7 +797,6 @@ export default function VillasCatalogPage() {
             />
           </div>
 
-          {/* Odbłysk szkła na ekranie */}
           <div
             className='absolute pointer-events-none rounded-[48px] opacity-20'
             style={{
@@ -857,7 +807,6 @@ export default function VillasCatalogPage() {
           />
         </div>
 
-        {/* Stopka pod telefonem */}
         <div className='absolute bottom-6 left-1/2 -translate-x-1/2'>
           <span className='text-white/20 text-[10px] tracking-widest uppercase'>
             © 2026 Ville Kołobrzeg

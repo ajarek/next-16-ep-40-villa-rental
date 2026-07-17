@@ -33,14 +33,12 @@ function ProfileContent() {
     "rezerwacje",
   )
 
-  // Chroń stronę
   useEffect(() => {
     if (initialized && !user && !loading) {
       router.push("/auth")
     }
   }, [initialized, user, loading, router])
 
-  // Pobierz dane z Firestore
   useEffect(() => {
     if (!user) return
     Promise.all([
@@ -73,7 +71,6 @@ function ProfileContent() {
 
   return (
     <div className='relative flex flex-col h-full w-full overflow-hidden bg-background'>
-      {/* ========== NAGŁÓWEK ========== */}
       <header className='shrink-0 flex items-center gap-3 px-4 pt-4 pb-3'>
         <button
           onClick={() => router.back()}
@@ -85,9 +82,7 @@ function ProfileContent() {
         <h1 className='text-base font-extrabold text-foreground'>Profil</h1>
       </header>
 
-      {/* ========== TREŚĆ ========== */}
       <main className='flex-1 overflow-y-auto px-5'>
-        {/* Avatar i dane */}
         <div className='flex flex-col items-center pt-4 pb-5'>
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
@@ -131,7 +126,6 @@ function ProfileContent() {
           </motion.div>
         </div>
 
-        {/* Statystyki */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -156,7 +150,6 @@ function ProfileContent() {
           </div>
         </motion.div>
 
-        {/* Zakładki */}
         <div className='flex gap-1 mb-4 bg-black/3 dark:bg-white/5 rounded-2xl p-1'>
           <button
             onClick={() => setActiveTab("rezerwacje")}
@@ -180,7 +173,6 @@ function ProfileContent() {
           </button>
         </div>
 
-        {/* Lista */}
         {dataLoading ? (
           <div className='flex items-center justify-center py-12'>
             <Loader2 className='w-5 h-5 text-foreground/30 animate-spin' />
@@ -191,7 +183,6 @@ function ProfileContent() {
           <FavoritesList favorites={favorites} router={router} />
         )}
 
-        {/* Wylogowanie */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -212,10 +203,6 @@ function ProfileContent() {
     </div>
   )
 }
-
-// ============================================================
-// PODKOMPONENT – LISTA REZERWACJI
-// ============================================================
 
 function BookingsList({
   bookings,
@@ -254,7 +241,6 @@ function BookingsList({
           onClick={() => router.push(`/villas/${b.villaId}`)}
           className='flex gap-3 px-3 py-3 rounded-2xl bg-black/3 dark:bg-white/5 border border-border/60 hover:bg-black/5 dark:hover:bg-white/10 transition-colors cursor-pointer'
         >
-          {/* Miniaturka */}
           <div className='relative w-14 h-14 rounded-xl overflow-hidden shrink-0'>
             <Image
               src={b.villaImage}
@@ -265,7 +251,6 @@ function BookingsList({
             />
           </div>
 
-          {/* Info */}
           <div className='flex-1 min-w-0'>
             <p className='text-xs font-semibold text-foreground truncate'>
               {b.villaName}
@@ -295,7 +280,6 @@ function BookingsList({
             </div>
           </div>
 
-          {/* Status */}
           <div className='flex items-start'>
             <span className='px-2 py-0.5 rounded-full bg-emerald-500/10 text-[9px] font-semibold text-emerald-500 whitespace-nowrap'>
               Potwierdzona
@@ -306,10 +290,6 @@ function BookingsList({
     </div>
   )
 }
-
-// ============================================================
-// PODKOMPONENT – LISTA ULUBIONYCH
-// ============================================================
 
 function FavoritesList({
   favorites,
@@ -396,9 +376,6 @@ function FavoritesList({
   )
 }
 
-// ============================================================
-// STRONA PROFILU
-// ============================================================
 export default function ProfilePage() {
   return (
     <>

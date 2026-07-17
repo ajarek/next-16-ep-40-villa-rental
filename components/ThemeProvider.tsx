@@ -6,8 +6,6 @@ import type { Theme, ThemeContextType } from "@/types/theme"
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  // Zawsze startujemy z "light" (zgodne z SSR), aby uniknąć błędu hydracji.
-  // W efekcie synchronizujemy z localStorage.
   const [theme, setTheme] = useState<Theme>("light")
   const [mounted, setMounted] = useState(false)
 

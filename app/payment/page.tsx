@@ -97,7 +97,6 @@ function PaymentContent() {
       try {
         return JSON.parse(stored) as BookingFormData
       } catch {
-        /* empty */
       }
     }
     const id = searchParams?.get("villaId")
@@ -772,7 +771,6 @@ function PaymentContent() {
 
   return (
     <div className='relative flex flex-col h-full w-full overflow-hidden bg-background'>
-      {/* ========== NAGŁÓWEK ========== */}
       <header className='shrink-0 bg-card/80 backdrop-blur-sm border-b border-border/50 z-30'>
         <div className='flex items-center justify-between px-4 pt-4 pb-3'>
           <div className='flex items-center gap-3'>
@@ -811,7 +809,6 @@ function PaymentContent() {
         {currentStep !== "potwierdzenie" && renderStepIndicator()}
       </header>
 
-      {/* ========== GŁÓWNA TREŚĆ ========== */}
       <main className='flex-1 overflow-y-auto overscroll-y-contain'>
         <AnimatePresence mode='wait'>
           {currentStep === "podsumowanie" && renderSummary()}
@@ -822,10 +819,8 @@ function PaymentContent() {
         <div className='h-20' />
       </main>
 
-      {/* ========== BOTTOM NAV ========== */}
       <BottomNav />
 
-      {/* ========== MODAL REGULAMINU ========== */}
       <AnimatePresence>
         {showRegulations && (
           <motion.div

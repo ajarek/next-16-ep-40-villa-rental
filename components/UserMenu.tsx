@@ -6,17 +6,12 @@ import { User, LogOut, Settings } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useAuth } from "@/lib/auth-context"
 
-// ============================================================
-// KOMPONENT – IKONA UŻYTKOWNIKA Z DROPDOWNEM
-// ============================================================
-
 export default function UserMenu() {
   const { user, initialized, logout } = useAuth()
   const router = useRouter()
   const [open, setOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
 
-  // Zamknij dropdown po kliknięciu poza menu
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
       if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
@@ -27,10 +22,8 @@ export default function UserMenu() {
     return () => document.removeEventListener("mousedown", handleClickOutside)
   }, [])
 
-  // Jeśli auth jeszcze się ładuje – nic nie pokazuj
   if (!initialized) return null
 
-  // Niezalogowany – przycisk logowania
   if (!user) {
     return (
       <button
@@ -43,7 +36,6 @@ export default function UserMenu() {
     )
   }
 
-  // Zalogowany – inicjały + dropdown
   const initials = (user.displayName || user.email || "U")
     .charAt(0)
     .toUpperCase()
@@ -56,7 +48,6 @@ export default function UserMenu() {
 
   return (
     <div ref={menuRef} className='relative'>
-      {/* Przycisk avataru */}
       <button
         onClick={() => setOpen(!open)}
         className='w-8 h-8 rounded-full bg-foreground/10 flex items-center justify-center hover:bg-foreground/20 transition-colors cursor-pointer border border-border/40'
@@ -66,7 +57,6 @@ export default function UserMenu() {
         <span className='text-xs font-bold text-foreground'>{initials}</span>
       </button>
 
-      {/* Dropdown */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -76,7 +66,6 @@ export default function UserMenu() {
             transition={{ duration: 0.15, ease: "easeOut" }}
             className='absolute right-0 top-full mt-2 w-56 bg-card border border-border/60 rounded-2xl shadow-xl z-50 overflow-hidden'
           >
-            {/* Info o użytkowniku */}
             <div className='px-4 py-3 border-b border-border/40'>
               <p className='text-xs font-semibold text-foreground truncate'>
                 {user.displayName || "Użytkownik"}
@@ -86,7 +75,6 @@ export default function UserMenu() {
               </p>
             </div>
 
-            {/* Akcje */}
             <div className='p-1.5'>
               <button
                 onClick={() => {
@@ -110,7 +98,6 @@ export default function UserMenu() {
               </button>
             </div>
 
-            {/* Wyloguj */}
             <div className='border-t border-border/40 p-1.5'>
               <button
                 onClick={handleLogout}

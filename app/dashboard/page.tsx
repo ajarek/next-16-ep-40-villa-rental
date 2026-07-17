@@ -47,10 +47,6 @@ import type {
 } from "@/types/dashboard"
 import BottomNav from "@/components/BottomNav"
 
-// ============================================================
-// STAŁE
-// ============================================================
-
 const STATUS_OPTIONS: BookingStatusOption[] = [
   {
     value: "pending",
@@ -100,10 +96,6 @@ function formatCurrency(amount: number): string {
   return `${amount.toLocaleString("pl-PL")} zł`
 }
 
-// ============================================================
-// TREŚĆ DASHBOARDU
-// ============================================================
-
 function DashboardContent() {
   const router = useRouter()
   const { user, loading, initialized } = useAuth()
@@ -120,10 +112,8 @@ function DashboardContent() {
   const [success, setSuccess] = useState<string | null>(null)
 
   const isAdmin = isAdminUser(user)
-  // Uprawnienia wyliczane z bieżącego stanu auth – bez setState w efekcie
   const accessDenied = Boolean(initialized && !loading && user && !isAdmin)
 
-  // Przekierowanie niezalogowanych do logowania
   useEffect(() => {
     if (!initialized || loading) return
     if (!user) {
@@ -192,7 +182,6 @@ function DashboardContent() {
     [mergeAdminIntoUsers],
   )
 
-  // Pobieranie danych admina – setState dopiero po await (asynchronicznie)
   useEffect(() => {
     if (!user || !isAdmin) return
 
@@ -355,7 +344,6 @@ function DashboardContent() {
     }
   }
 
-  // Stany ładowania / brak dostępu
   if (loading || !initialized) {
     return (
       <div className='relative flex flex-col h-full w-full overflow-hidden bg-background'>
@@ -420,7 +408,6 @@ function DashboardContent() {
 
   return (
     <div className='relative flex flex-col h-full w-full overflow-hidden bg-background'>
-      {/* ========== NAGŁÓWEK ========== */}
       <header className='shrink-0 flex items-center gap-3 px-4 pt-4 pb-3'>
         <button
           onClick={() => router.back()}
@@ -449,9 +436,7 @@ function DashboardContent() {
         </button>
       </header>
 
-      {/* ========== TREŚĆ ========== */}
       <main className='flex-1 overflow-y-auto px-4 pb-4'>
-        {/* Odznaka admina */}
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
@@ -473,7 +458,6 @@ function DashboardContent() {
           </span>
         </motion.div>
 
-        {/* Zakładki */}
         <div className='flex gap-1 mb-4 bg-black/3 dark:bg-white/5 rounded-2xl p-1'>
           {tabs.map((tab) => {
             const Icon = tab.icon
@@ -495,7 +479,6 @@ function DashboardContent() {
           })}
         </div>
 
-        {/* Komunikaty */}
         <AnimatePresence>
           {error && (
             <motion.div
@@ -589,10 +572,6 @@ function DashboardContent() {
     </div>
   )
 }
-
-// ============================================================
-// PRZEGLĄD – STATYSTYKI
-// ============================================================
 
 function OverviewPanel({
   stats,
@@ -730,10 +709,6 @@ function OverviewPanel({
     </div>
   )
 }
-
-// ============================================================
-// UŻYTKOWNICY (ADMIN) – LISTA + EDYCJA
-// ============================================================
 
 function UsersAdminPanel({
   users,
@@ -1049,10 +1024,6 @@ function UserEditForm({
   )
 }
 
-// ============================================================
-// LISTA REZERWACJI (ADMIN)
-// ============================================================
-
 function BookingsAdminList({
   bookings,
   actionId,
@@ -1143,7 +1114,6 @@ function BookingsAdminList({
               </div>
             </div>
 
-            {/* Akcje */}
             <div className='mt-3 flex items-center gap-2'>
               <label className='sr-only' htmlFor={`status-${b.id}`}>
                 Status rezerwacji
@@ -1183,10 +1153,6 @@ function BookingsAdminList({
     </div>
   )
 }
-
-// ============================================================
-// LISTA ULUBIONYCH (ADMIN)
-// ============================================================
 
 function FavoritesAdminList({
   favorites,
@@ -1271,10 +1237,6 @@ function FavoritesAdminList({
     </div>
   )
 }
-
-// ============================================================
-// STRONA DASHBOARD
-// ============================================================
 
 export default function DashboardPage() {
   return (

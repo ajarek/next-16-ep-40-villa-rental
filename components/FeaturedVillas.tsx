@@ -86,7 +86,6 @@ export default function FeaturedVillas() {
 
   return (
     <div className='w-full flex flex-col gap-4'>
-      {/* Nagłówek sekcji */}
       <div className='flex items-center justify-between px-1'>
         <h2 className='text-lg font-bold text-foreground tracking-tight'>
           Polecane wille
@@ -99,9 +98,7 @@ export default function FeaturedVillas() {
         </Link>
       </div>
 
-      {/* Karuzela */}
       <div ref={containerRef} className='relative w-full overflow-hidden px-1'>
-        {/* Przycisk w lewo */}
         {currentIndex > 0 && (
           <button
             onClick={() => goTo(currentIndex - 1)}
@@ -112,7 +109,6 @@ export default function FeaturedVillas() {
           </button>
         )}
 
-        {/* Przycisk w prawo */}
         {currentIndex < maxIndex && (
           <button
             onClick={() => goTo(currentIndex + 1)}
@@ -123,7 +119,6 @@ export default function FeaturedVillas() {
           </button>
         )}
 
-        {/* Płynny przewijany kontener */}
         <motion.div
           className='flex gap-4 pb-4'
           drag='x'
@@ -147,7 +142,6 @@ export default function FeaturedVillas() {
                 className='block w-[240px] shrink-0'
               >
                 <motion.div className='bg-card text-card-foreground rounded-2xl border border-border/80 shadow-md overflow-hidden flex flex-col group'>
-                  {/* Sekcja zdjęcia */}
                   <div className='relative h-[150px] w-full overflow-hidden'>
                     <Image
                       src={villa.image}
@@ -157,7 +151,6 @@ export default function FeaturedVillas() {
                       sizes='240px'
                     />
 
-                    {/* Przycisk ulubionych (serduszko) */}
                     <button
                       onClick={(e) => toggleFavorite(villa.id, e)}
                       className='absolute top-3 right-3 w-8 h-8 rounded-full bg-white/80 dark:bg-black/60 backdrop-blur-xs flex items-center justify-center shadow-md cursor-pointer focus:outline-none'
@@ -178,7 +171,6 @@ export default function FeaturedVillas() {
                     </button>
                   </div>
 
-                  {/* Informacje o willi */}
                   <div className='p-4 flex flex-col flex-1 gap-2'>
                     <div className='flex flex-col gap-0.5'>
                       <h3 className='font-bold text-sm text-foreground truncate'>
@@ -190,7 +182,6 @@ export default function FeaturedVillas() {
                       </div>
                     </div>
 
-                    {/* Cena i ocena */}
                     <div className='flex items-center justify-between mt-auto pt-2 border-t border-border/40'>
                       <div className='flex items-baseline gap-0.5'>
                         <span className='text-xs text-muted dark:text-muted-foreground/70'>
@@ -221,7 +212,6 @@ export default function FeaturedVillas() {
           })}
         </motion.div>
 
-        {/* Kropki nawigacyjne */}
         {villas.length > 1 && (
           <div className='flex items-center justify-center gap-1.5 pb-1'>
             {Array.from({ length: maxIndex + 1 }).map((_, i) => (

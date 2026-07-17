@@ -26,13 +26,13 @@ export type BookingStatusOption = {
   className: string
 }
 
-/** Rola użytkownika w panelu administratora */
+
 export type UserRole = "client" | "admin"
 
-/** Status konta w panelu administratora */
+
 export type UserAccountStatus = "active" | "blocked"
 
-/** Profil użytkownika przechowywany w kolekcji Firestore `users` */
+
 export type UserAdminRecord = {
   uid: string
   email: string
@@ -43,11 +43,11 @@ export type UserAdminRecord = {
   notes: string
   bookingsCount: number
   favoritesCount: number
-  /** Czy dokument istnieje w kolekcji `users` */
+
   hasProfile: boolean
 }
 
-/** Pola edytowalne w formularzu użytkownika */
+
 export type UserAdminEditInput = {
   email: string
   displayName: string

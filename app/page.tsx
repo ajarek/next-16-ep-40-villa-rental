@@ -24,7 +24,6 @@ import SearchForm from "@/components/SearchForm"
 import FeaturedVillas from "@/components/FeaturedVillas"
 import BottomNav from "@/components/BottomNav"
 
-// Sekcja "Dlaczego Kołobrzeg?" – zalety lokalizacji
 const kolobrzegFeatures = [
   { icon: Waves, label: "Piękne plaże" },
   { icon: Anchor, label: "Atrakcje kurortyczne" },
@@ -32,7 +31,6 @@ const kolobrzegFeatures = [
   { icon: Star, label: "Idealne na każdą okazję" },
 ]
 
-// Animacja dla kolejnych elementów przy wejściu na stronę
 const fadeUpVariant: Variants = {
   hidden: { opacity: 0, y: 24 },
   visible: (i: number) => ({
@@ -47,9 +45,7 @@ function AppContent() {
   const [menuOpen, setMenuOpen] = useState(false)
 
   return (
-    // Kontener aplikacji – relatywny, aby menu overlay miało dobre pozycjonowanie
     <div className='relative flex flex-col h-full w-full overflow-hidden bg-background'>
-      {/* ========== NAGŁÓWEK ========== */}
       <header className='shrink-0 flex items-center justify-between px-5 pt-4 pb-3 bg-card/80 backdrop-blur-sm border-b border-border/50 z-30'>
         <button
           id='hamburger-menu-button'
@@ -60,7 +56,6 @@ function AppContent() {
           <Menu className='w-6 h-6 text-foreground' />
         </button>
 
-        {/* Logo */}
         <div className='flex flex-col items-center leading-none'>
           <span className='text-[10px] font-bold tracking-[0.2em]  uppercase'>
             Wille
@@ -76,12 +71,9 @@ function AppContent() {
         </div>
       </header>
 
-      {/* ========== WYSUWANE MENU MOBILNE ========== */}
       <MobileMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
 
-      {/* ========== GŁÓWNA TREŚĆ (przewijana) ========== */}
       <main className='flex-1 overflow-y-auto overscroll-y-contain'>
-        {/* --- SEKCJA HERO --- */}
         <motion.section
           custom={0}
           variants={fadeUpVariant}
@@ -97,10 +89,8 @@ function AppContent() {
             className='object-cover'
             sizes='(max-width: 480px) 100vw, 480px'
           />
-          {/* Gradient nakładka dla czytelności tekstu */}
           <div className='absolute inset-0 bg-linear-to-b from-primary/60 via-primary/40 to-primary/80' />
 
-          {/* Tekst hero */}
           <div className='absolute inset-0 flex flex-col justify-end p-6 pb-8'>
             <motion.h1
               custom={1}
@@ -126,7 +116,6 @@ function AppContent() {
           </div>
         </motion.section>
 
-        {/* --- FORMULARZ WYSZUKIWANIA (nakładający się na hero z ujemnym marginesem) --- */}
         <div className='px-4 -mt-6 relative z-10'>
           <motion.div
             custom={3}
@@ -138,7 +127,6 @@ function AppContent() {
           </motion.div>
         </div>
 
-        {/* --- POLECANE WILLE --- */}
         <div className='px-4 mt-8'>
           <motion.div
             custom={4}
@@ -150,7 +138,6 @@ function AppContent() {
           </motion.div>
         </div>
 
-        {/* --- SEKCJA "DLACZEGO KOŁOBRZEG?" --- */}
         <div className='px-4 mt-8'>
           <motion.div
             custom={5}
@@ -187,7 +174,6 @@ function AppContent() {
           </motion.div>
         </div>
 
-        {/* --- SEKCJA "JAK TO DZIAŁA?" – PROCES PŁATNOŚCI --- */}
         <div className='px-4 mt-8'>
           <motion.div
             custom={8}
@@ -209,8 +195,7 @@ function AppContent() {
             </div>
 
             <div className='relative bg-card border border-border/80 rounded-3xl p-5 shadow-sm overflow-hidden'>
-              {/* Dekoracyjne tło */}
-              <div className='absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full blur-3xl pointer-events-none' />
+                  <div className='absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full blur-3xl pointer-events-none' />
 
               <div className='flex flex-col gap-0 relative'>
                 {[
@@ -240,7 +225,6 @@ function AppContent() {
                   },
                 ].map((step, i) => (
                   <div key={i} className='flex items-start gap-4 py-3'>
-                    {/* Numer i linia łącząca */}
                     <div className='flex flex-col items-center'>
                       <div
                         className={`w-10 h-10 rounded-xl ${step.color} flex items-center justify-center shadow-sm shrink-0`}
@@ -250,7 +234,6 @@ function AppContent() {
                       {i < 3 && <div className='w-0.5 h-6 bg-border/60 mt-1' />}
                     </div>
 
-                    {/* Treść */}
                     <div className='flex-1 min-w-0 pt-1'>
                       <div className='flex items-center gap-2'>
                         <span className='text-[10px] font-bold text-muted dark:text-muted-foreground/50'>
@@ -265,7 +248,6 @@ function AppContent() {
                       </p>
                     </div>
 
-                    {/* Strzałka (oprócz ostatniego) */}
                     {i < 3 && (
                       <div className='hidden sm:flex items-center self-center ml-2'>
                         <ArrowRight className='w-4 h-4 text-muted dark:text-muted-foreground/30' />
@@ -275,7 +257,6 @@ function AppContent() {
                 ))}
               </div>
 
-              {/* Dolny pasek z informacją o bezpieczeństwie */}
               <div className='mt-2 pt-3 border-t border-border/40 flex items-center gap-2'>
                 <div className='flex -space-x-1'>
                   <div className='w-5 h-5 rounded-full bg-blue-500/20 flex items-center justify-center'>
@@ -302,7 +283,6 @@ function AppContent() {
           </motion.div>
         </div>
 
-        {/* --- BANER REJESTRACYJNY --- */}
         <div className='px-4 mt-8 mb-6'>
           <motion.div
             custom={9}
@@ -319,10 +299,8 @@ function AppContent() {
               className='w-full h-40 object-cover'
               sizes='(max-width: 480px) 100vw, 480px'
             />
-            {/* Gradient nakładka */}
             <div className='absolute inset-0 bg-linear-to-r from-primary/85 to-primary/40' />
 
-            {/* Treść baneru */}
             <div className='absolute inset-0 flex flex-col justify-center p-6'>
               <p className='text-white text-xs font-semibold uppercase tracking-wider opacity-80 mb-1'>
                 Nowi użytkownicy
@@ -345,31 +323,23 @@ function AppContent() {
         </div>
       </main>
 
-      {/* ========== DOLNA NAWIGACJA ========== */}
       <BottomNav />
     </div>
   )
 }
 
-// ============================================================
-// Główna strona – otacza zawartość ramką telefonu na desktopie
-// ============================================================
 export default function StronaGlowna() {
   return (
     <>
-      {/* === WIDOK MOBILNY (pełny ekran) === */}
       <div className='flex md:hidden h-screen w-full'>
         <AppContent />
       </div>
 
-      {/* === WIDOK DESKTOPOWY (symulator telefonu) === */}
       <div className='hidden md:flex min-h-screen w-full items-center justify-center relative overflow-hidden bg-linear-to-br from-[#0a2540] via-[#1a3a5c] to-[#0a2540]'>
-        {/* Ozdobne elementy tła */}
         <div className='absolute top-[-10%] left-[-5%] w-125 h-125 rounded-full bg-accent/10 blur-[120px] pointer-events-none' />
         <div className='absolute bottom-[-10%] right-[-5%] w-100 h-100 rounded-full bg-blue-500/10 blur-[100px] pointer-events-none' />
         <div className='absolute top-[30%] right-[15%] w-75 h-75 rounded-full bg-accent/5 blur-[80px] pointer-events-none' />
 
-        {/* Etykieta aplikacji nad telefonem */}
         <div className='absolute top-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1'>
           <span className='text-white/40 text-xs tracking-[0.3em] uppercase font-medium'>
             Ville Kołobrzeg
@@ -379,7 +349,6 @@ export default function StronaGlowna() {
           </span>
         </div>
 
-        {/* Ramka telefonu */}
         <div
           className='relative'
           style={{
@@ -387,7 +356,6 @@ export default function StronaGlowna() {
             height: "844px",
           }}
         >
-          {/* Zewnętrzna ramka urządzenia */}
           <div
             className='absolute inset-0 rounded-[55px] shadow-[0_60px_120px_rgba(0,0,0,0.6),0_0_0_1px_rgba(255,255,255,0.08)] overflow-hidden'
             style={{
@@ -395,14 +363,12 @@ export default function StronaGlowna() {
                 "linear-gradient(145deg, #2a2a2a 0%, #1a1a1a 30%, #0d0d0d 60%, #1a1a1a 100%)",
             }}
           >
-            {/* Wewnętrzne wcięcie ramki (bezel) */}
             <div
               className='absolute rounded-[48px] overflow-hidden bg-background'
               style={{
                 inset: "8px",
               }}
             >
-              {/* Notch – górna belka telefonu z aparatem i głośnikiem */}
               <div
                 className='absolute top-0 left-1/2 -translate-x-1/2 z-50 flex items-center justify-center'
                 style={{ width: "130px", height: "34px" }}
@@ -416,13 +382,11 @@ export default function StronaGlowna() {
                 </div>
               </div>
 
-              {/* Treść aplikacji */}
               <div className='absolute inset-0 pt-8.5'>
                 <AppContent />
               </div>
             </div>
 
-            {/* Lewy przycisk zasilania */}
             <div
               className='absolute rounded-r-sm bg-zinc-700'
               style={{
@@ -432,7 +396,6 @@ export default function StronaGlowna() {
                 height: "60px",
               }}
             />
-            {/* Prawa głośność góra */}
             <div
               className='absolute rounded-l-sm bg-zinc-700'
               style={{
@@ -442,7 +405,6 @@ export default function StronaGlowna() {
                 height: "40px",
               }}
             />
-            {/* Prawa głośność dół */}
             <div
               className='absolute rounded-l-sm bg-zinc-700'
               style={{
@@ -452,7 +414,6 @@ export default function StronaGlowna() {
                 height: "40px",
               }}
             />
-            {/* Przycisk wyciszenia */}
             <div
               className='absolute rounded-l-sm bg-zinc-700'
               style={{
@@ -464,7 +425,6 @@ export default function StronaGlowna() {
             />
           </div>
 
-          {/* Odbłysk szkła na ekranie */}
           <div
             className='absolute pointer-events-none rounded-[48px] opacity-20'
             style={{
@@ -475,7 +435,6 @@ export default function StronaGlowna() {
           />
         </div>
 
-        {/* Stopka pod telefonem */}
         <div className='absolute bottom-6 left-1/2 -translate-x-1/2'>
           <span className='text-white/20 text-[10px] tracking-widest uppercase'>
             © 2026 Ville Kołobrzeg

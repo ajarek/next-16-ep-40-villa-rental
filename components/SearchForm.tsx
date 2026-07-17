@@ -18,14 +18,12 @@ export default function SearchForm() {
   )
   const [guests, setGuests] = useState(2)
 
-  // Stany otwarcia dropdownów
   const [showLocationDropdown, setShowLocationDropdown] = useState(false)
   const [showGuestsDropdown, setShowGuestsDropdown] = useState(false)
 
   const locationRef = useRef<HTMLDivElement>(null)
   const guestsRef = useRef<HTMLDivElement>(null)
 
-  // Zamykanie dropdownów przy kliknięciu poza nimi
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (
@@ -58,7 +56,6 @@ export default function SearchForm() {
 
   return (
     <div className='w-full bg-card text-card-foreground rounded-3xl p-5 shadow-xl border border-border/80 flex flex-col gap-4'>
-      {/* Pole 1: Lokalizacja */}
       <div className='relative' ref={locationRef}>
         <div
           onClick={() => setShowLocationDropdown(!showLocationDropdown)}
@@ -101,7 +98,6 @@ export default function SearchForm() {
         </AnimatePresence>
       </div>
 
-      {/* Pole 2 i 3: Daty Przyjazd / Wyjazd (w jednym rzędzie) */}
       <div className='grid grid-cols-2 gap-3'>
         <DatePicker
           name='checkIn'
@@ -120,7 +116,6 @@ export default function SearchForm() {
         />
       </div>
 
-      {/* Pole 4: Goście */}
       <div className='relative' ref={guestsRef}>
         <div
           onClick={() => setShowGuestsDropdown(!showGuestsDropdown)}
@@ -178,16 +173,13 @@ export default function SearchForm() {
         </AnimatePresence>
       </div>
 
-      {/* Przycisk Szukaj – nawiguje do katalogu z parametrami */}
       <Button
         variant='default'
         size='default'
         onClick={() => {
           const params = new URLSearchParams()
-          // Pomijamy lokalizację, jeśli to domyślna ("wszędzie")
           const isDefaultLocation = location === "Kołobrzeg, Polska"
           if (!isDefaultLocation) {
-            // Normalizuj: "Kołobrzeg - Centrum" → "Kołobrzeg-Centrum"
             const normalizedLocation = location
               .replace(/^Kołobrzeg,?\s*/i, "Kołobrzeg-")
               .replace(/\s*-\s*/g, "-")
