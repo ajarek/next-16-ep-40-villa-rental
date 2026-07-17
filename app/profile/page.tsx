@@ -248,6 +248,7 @@ function BookingsList({
               fill
               className='object-cover'
               sizes='56px'
+              loading='eager'
             />
           </div>
 
@@ -335,6 +336,7 @@ function FavoritesList({
               fill
               className='object-cover'
               sizes='56px'
+              loading='eager'
             />
           </div>
           <div className='flex-1 min-w-0'>

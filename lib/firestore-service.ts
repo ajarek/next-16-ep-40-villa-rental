@@ -93,7 +93,6 @@ export async function getBookings(userId: string): Promise<BookingData[]> {
   return snapshot.docs.map((d) => d.data() as BookingData)
 }
 
-
 export async function getAllBookings(): Promise<BookingData[]> {
   if (!db) return []
   const snapshot = await getDocs(collection(db, BOOKINGS_COLLECTION))
@@ -108,7 +107,6 @@ export async function getAllBookings(): Promise<BookingData[]> {
   })
 }
 
-
 export async function updateBookingStatus(
   bookingId: string,
   status: BookingStatus,
@@ -117,12 +115,10 @@ export async function updateBookingStatus(
   await updateDoc(doc(db, BOOKINGS_COLLECTION, bookingId), { status })
 }
 
-
 export async function deleteBooking(bookingId: string): Promise<void> {
   if (!db) throw new Error("Firestore nie jest dostępny")
   await deleteDoc(doc(db, BOOKINGS_COLLECTION, bookingId))
 }
-
 
 export async function getAllFavorites(): Promise<FavoriteAdminRecord[]> {
   if (!db) return []
@@ -145,7 +141,6 @@ export async function getAllFavorites(): Promise<FavoriteAdminRecord[]> {
   })
 }
 
-
 export async function deleteFavoriteById(docId: string): Promise<void> {
   if (!db) throw new Error("Firestore nie jest dostępny")
   await deleteDoc(doc(db, FAVORITES_COLLECTION, docId))
@@ -160,7 +155,6 @@ function asUserRole(value: unknown): UserRole {
 function asUserStatus(value: unknown): UserAccountStatus {
   return value === "blocked" ? "blocked" : "active"
 }
-
 
 export async function getAllUsersAdmin(
   bookings: BookingData[],
@@ -236,7 +230,6 @@ export async function getAllUsersAdmin(
   })
 }
 
-
 export async function saveUserProfile(
   uid: string,
   input: UserAdminEditInput,
@@ -259,7 +252,6 @@ export async function saveUserProfile(
     { merge: true },
   )
 }
-
 
 export async function deleteUserProfile(uid: string): Promise<void> {
   if (!db) throw new Error("Firestore nie jest dostępny")

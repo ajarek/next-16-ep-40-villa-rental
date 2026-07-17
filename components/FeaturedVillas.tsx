@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect, useRef, useCallback } from "react"
+import { useState, useEffect, useRef, useCallback } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Heart, Star, MapPin, ChevronLeft, ChevronRight } from "lucide-react"
@@ -149,6 +149,7 @@ export default function FeaturedVillas() {
                       fill
                       className='object-cover group-hover:scale-105 transition-transform duration-300'
                       sizes='240px'
+                      loading='eager'
                     />
 
                     <button

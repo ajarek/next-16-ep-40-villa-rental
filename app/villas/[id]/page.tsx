@@ -238,6 +238,7 @@ function VillaDetailContent() {
                 className='object-cover'
                 priority
                 sizes='(max-width: 480px) 100vw, 480px'
+                loading='eager'
               />
               <div className='absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-black/20' />
             </motion.div>

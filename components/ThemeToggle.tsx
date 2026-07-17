@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useSyncExternalStore } from "react"
+import { useSyncExternalStore } from "react"
 import { useTheme } from "./ThemeProvider"
 import { Sun, Moon } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"

@@ -968,9 +968,7 @@ function UserEditForm({
             <select
               id='user-status'
               value={status}
-              onChange={(e) =>
-                setStatus(e.target.value as UserAccountStatus)
-              }
+              onChange={(e) => setStatus(e.target.value as UserAccountStatus)}
               disabled={busy}
               className={fieldClass + " cursor-pointer"}
             >
@@ -1077,6 +1075,7 @@ function BookingsAdminList({
                   fill
                   className='object-cover'
                   sizes='56px'
+                  loading='eager'
                 />
               </div>
               <div className='flex-1 min-w-0'>
@@ -1203,6 +1202,7 @@ function FavoritesAdminList({
                 fill
                 className='object-cover'
                 sizes='56px'
+                loading='eager'
               />
             </div>
             <div className='flex-1 min-w-0'>

@@ -96,8 +96,7 @@ function PaymentContent() {
     if (stored) {
       try {
         return JSON.parse(stored) as BookingFormData
-      } catch {
-      }
+      } catch {}
     }
     const id = searchParams?.get("villaId")
     if (!id) return null
@@ -243,6 +242,7 @@ function PaymentContent() {
             fill
             className='object-cover'
             sizes='64px'
+            loading='eager'
           />
         </div>
         <div className='min-w-0 flex-1'>

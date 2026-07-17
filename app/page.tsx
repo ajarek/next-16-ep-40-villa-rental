@@ -88,6 +88,7 @@ function AppContent() {
             priority
             className='object-cover'
             sizes='(max-width: 480px) 100vw, 480px'
+            loading='eager'
           />
           <div className='absolute inset-0 bg-linear-to-b from-primary/60 via-primary/40 to-primary/80' />
 
@@ -195,7 +196,7 @@ function AppContent() {
             </div>
 
             <div className='relative bg-card border border-border/80 rounded-3xl p-5 shadow-sm overflow-hidden'>
-                  <div className='absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full blur-3xl pointer-events-none' />
+              <div className='absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full blur-3xl pointer-events-none' />
 
               <div className='flex flex-col gap-0 relative'>
                 {[
@@ -298,6 +299,7 @@ function AppContent() {
               height={200}
               className='w-full h-40 object-cover'
               sizes='(max-width: 480px) 100vw, 480px'
+              loading='eager'
             />
             <div className='absolute inset-0 bg-linear-to-r from-primary/85 to-primary/40' />
 
